@@ -21,4 +21,4 @@ This repository contains the deployment package for the CODEX NUM-Knoten.
 | gPAS SOAP API Endpoint                | <http://localhost:18081/gpas/gpasService?wsdl> |
 | gPAS Domain Service SOAP API Endpoint | <http://localhost:18081/gpas/DomainService>    |
 | gPAS Web UI                           | <http://localhost:18081/gpas-web>              |
-| i2b2                                  | <http://localhost:18081/gpas-web>              |
+| i2b2 Web UI                           | <http://localhost:380/webclient/>              |
