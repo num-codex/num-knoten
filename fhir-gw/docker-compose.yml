@@ -1,0 +1,147 @@
+version: "3.8"
+
+services:
+  fhir-gateway:
+    image: docker.miracum.org/miracum-etl/fhir-gateway:3.3.5
+    restart: on-failure
+    environment:
+      SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL:-jdbc:postgresql://fhir-db:5432/fhir}
+      SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_USERNAME:-postgres}
+      SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD:-postgres}
+      SERVICES_PSEUDONYMIZER_ENABLED: ${SERVICES_PSEUDONYMIZER_ENABLED:-true}
+      SERVICES_PSEUDONYMIZER_URL: ${SERVICES_PSEUDONYMIZER_URL:-http://fhir-pseudonymizer:8080/fhir}
+      SERVICES_LOINC_CONVERSIONS_URL: ${SERVICES_LOINC_CONVERSIONS_URL:-http://loinc-converter:8080/api/v1}
+      SERVICES_FHIRSERVER_URL: ${SERVICES_FHIRSERVER_URL:-http://fhir-server:8080/fhir}
+      SERVICES_FHIRSERVER_ENABLED: ${SERVICES_FHIRSERVER_ENABLED:-false}
+      SERVICES_PSQL_ENABLED: ${SERVICES_PSQL_ENABLED:-true}
+      SERVICES_KAFKA_ENABLED: ${SERVICES_KAFKA_ENABLED:-false}
+      BOOTSTRAP_SERVERS: ${BOOTSTRAP_SERVERS:-kafka1:19092}
+      OPENTRACING_JAEGER_ENABLED: ${OPENTRACING_JAEGER_ENABLED:-false}
+      OPENTRACING_JAEGER_UDP_SENDER_HOST: ${OPENTRACING_JAEGER_UDP_SENDER_HOST:-jaeger}
+    ports:
+      - ${PORT_FHIR_GATEWAY:-18080}:8080
+    depends_on:
+      - loinc-converter
+      - fhir-db
+      - fhir-pseudonymizer
+
+  fhir-pseudonymizer:
+    image: docker.miracum.org/miracum-etl/fhir-pseudonymizer:1.6.0
+    environment:
+      GPAS__URL: ${GPAS_URL:-http://gpas:8080/gpas/gpasService}
+    volumes:
+      - ./anonymization.yaml:/etc/anonymization.yaml:ro
+    depends_on:
+      - gpas
+
+  loinc-converter:
+    image: docker.miracum.org/miracum-etl/loinc-conversion:1.10.1
+
+  fhir-db:
+    image: postgres:12.5
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${FHIR_GATEWAY_DB_USER:-postgres}
+      POSTGRES_DB: ${FHIR_GATEWAY_DB_DATABASE:-fhir}
+      POSTGRES_PASSWORD: ${FHIR_GATEWAY_DB_PASSWORD:-postgres}
+    ports:
+      - ${PORT_FHIR_GATEWAY_DB:-15432}:5432
+    volumes:
+      - fhir-gateway-data:/var/lib/postgresql/data:rw
+
+  gpas:
+    image: docker.miracum.org/gpas/gpas:1.10.0-20201221
+    restart: unless-stopped
+    environment:
+      JAVA_OPTS: >-
+        -Xms512m
+        -Xmx1G
+        -XX:MetaspaceSize=96M
+        -XX:MaxMetaspaceSize=256m
+        -Djava.net.preferIPv4Stack=true
+        -Djava.awt.headless=true
+    ports:
+      - ${PORT_GPAS:-18081}:8080
+
+  gpasinit-patient:
+    image: curlimages/curl:7.74.0
+    command: |
+      -X POST
+      -H 'Content-Type:application/xml'
+      -d '<?xml version="1.0" encoding="UTF-8"?>
+          <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:psn="http://psn.ttp.ganimed.icmvc.emau.org/">
+            <soapenv:Header/>
+            <soapenv:Body>
+                <psn:addDomain>
+                  <domainDTO>
+                      <name>PATIENT</name>
+                      <label>PATIENT</label>
+                      <checkDigitClass>org.emau.icmvc.ganimed.ttp.psn.generator.ReedSolomonLagrange</checkDigitClass>
+                      <alphabet>org.emau.icmvc.ganimed.ttp.psn.alphabets.Symbol31</alphabet>
+                      <config>
+                        <forceCache>DEFAULT</forceCache>
+                        <includePrefixInCheckDigitCalculation>false</includePrefixInCheckDigitCalculation>
+                        <includeSuffixInCheckDigitCalculation>false</includeSuffixInCheckDigitCalculation>
+                        <maxDetectedErrors>2</maxDetectedErrors>
+                        <psnLength>31</psnLength>
+                        <psnPrefix>p</psnPrefix>
+                        <psnSuffix/>
+                        <psnsDeletable>true</psnsDeletable>
+                        <useLastCharAsDelimiterAfterXChars>0</useLastCharAsDelimiterAfterXChars>
+                      </config>
+                      <comment>Domäne für Patienten-IDs (PID)</comment>
+                  </domainDTO>
+                </psn:addDomain>
+            </soapenv:Body>
+          </soapenv:Envelope>'
+      --retry-connrefuse
+      --connect-timeout 10
+      --max-time 120
+      --retry 10
+      --retry-delay 10
+      http://gpas:8080/gpas/DomainService
+    depends_on:
+      - gpas
+
+  gpasinit-fall:
+    image: curlimages/curl:7.74.0
+    command: |
+      -X POST
+      -H 'Content-Type:application/xml'
+      -d '<?xml version="1.0" encoding="UTF-8"?>
+          <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:psn="http://psn.ttp.ganimed.icmvc.emau.org/">
+            <soapenv:Header/>
+            <soapenv:Body>
+                <psn:addDomain>
+                  <domainDTO>
+                      <name>FALL</name>
+                      <label>FALL</label>
+                      <checkDigitClass>org.emau.icmvc.ganimed.ttp.psn.generator.ReedSolomonLagrange</checkDigitClass>
+                      <alphabet>org.emau.icmvc.ganimed.ttp.psn.alphabets.Symbol31</alphabet>
+                      <config>
+                        <forceCache>DEFAULT</forceCache>
+                        <includePrefixInCheckDigitCalculation>false</includePrefixInCheckDigitCalculation>
+                        <includeSuffixInCheckDigitCalculation>false</includeSuffixInCheckDigitCalculation>
+                        <maxDetectedErrors>2</maxDetectedErrors>
+                        <psnLength>31</psnLength>
+                        <psnPrefix>f</psnPrefix>
+                        <psnSuffix/>
+                        <psnsDeletable>true</psnsDeletable>
+                        <useLastCharAsDelimiterAfterXChars>0</useLastCharAsDelimiterAfterXChars>
+                      </config>
+                      <comment>Domäne für Fallnummern (Encounter ID)</comment>
+                  </domainDTO>
+                </psn:addDomain>
+            </soapenv:Body>
+          </soapenv:Envelope>'
+      --retry-connrefuse
+      --connect-timeout 10
+      --max-time 120
+      --retry 10
+      --retry-delay 10
+      http://gpas:8080/gpas/DomainService
+    depends_on:
+      - gpas
+
+volumes:
+  fhir-gateway-data: {}
