@@ -1,66 +1,37 @@
-version: "3.8"
-
 services:
-  i2b2-db:
-    image: docker.miracum.org/i2b2/i2b2-db:1.7.12a-numcodex-1
+  i2b2-2web:
+    container_name: i2b2web
+    image: docker.miracum.org/i2b2/i2b2-web:miracolix-v1.3.0
     restart: unless-stopped
-    environment:
-      DWH_HOST: ${DWH_HOST:-i2b2-app}
-      I2B2PM_PW: ${I2B2PM_PW:-NkVizD1s}
-      I2B2HIVE_PW: ${I2B2HIVE_PW:-x5GwmzSo}
-      I2B2DEMODATA_PW: ${I2B2DEMODATA_PW:-LLaNo6nK}
-      I2B2IMDATA_PW: ${I2B2IMDATA_PW:-OqQRwjD6}
-      I2B2METADATA_PW: ${I2B2METADATA_PW:-RY7PmsfH}
-      I2B2WORKDATA_PW: ${I2B2WORKDATA_PW:-WpsZ5jRQ}
-      POSTGRES_PW: ${POSTGRES_PW:-6RRmzUb7}
-      PORT_REST: ${PORT_REST_INTERNAL:-9090}
-      ALLOWED_ETL_HOSTS: ${ALLOWED_ETL_HOSTS:-all}
-      INITIAL_WEBUI_DEMO_PW: ${INITIAL_WEBUI_DEMO_PW:-demouser}
-      INITIAL_WEBUI_I2B2_PW: ${INITIAL_WEBUI_I2B2_PW:-demouser}
-      HASH_SALT: ${HASH_SALT:-foOY7aHY}
-      HASH_ITERATIONS: ${HASH_ITERATIONS:-1200}
     ports:
-      - ${PORT_DB:-35432}:5432
+      - "${PORT_I2B2_WEB_HTTP:-80}:80"
+      - "${PORT_I2B2_WEB_HTTPS:-443}:443"
+    command: /run-httpd.sh localhost
     volumes:
-      - ./db/entrypoint/entrypoint-dev.sh:/etc/init.d/entrypoint.sh
-      - ./db/entrypoint/setEndpoints-dev.sh:/etc/postgresql/10/main/setEndpoints.sh
-      - i2b2_tblspc:/var/lib/postgresql
-
-  i2b2-app:
-    image: docker.miracum.org/i2b2/i2b2-app:1.7.12a-numcodex-1
-    restart: unless-stopped
-    environment:
-      I2B2PM_PW: ${I2B2PM_PW:-NkVizD1s}
-      I2B2HIVE_PW: ${I2B2HIVE_PW:-x5GwmzSo}
-      I2B2DEMODATA_PW: ${I2B2DEMODATA_PW:-LLaNo6nK}
-      I2B2IMDATA_PW: ${I2B2IMDATA_PW:-OqQRwjD6}
-      I2B2METADATA_PW: ${I2B2METADATA_PW:-RY7PmsfH}
-      I2B2WORKDATA_PW: ${I2B2WORKDATA_PW:-WpsZ5jRQ}
-      PORT_REST: ${PORT_REST:-39090}
-      HASH_SALT: ${HASH_SALT:-foOY7aHY}
-      HASH_ITERATIONS: ${HASH_ITERATIONS:-1200}
-    ports:
-      - ${PORT_REST:-39090}:9090
+      - ./i2b2_config_data.js:/var/www/html/webclient/i2b2_config_data.js:ro
     depends_on:
-      - i2b2-db
+      - i2b2-wildfly
 
-  i2b2-http:
-    image: docker.miracum.org/i2b2/i2b2-http:1.7.12a-numcodex-1
+  i2b2-wildfly:
+    container_name: i2b2wildfly
+    image: docker.miracum.org/i2b2/i2b2-wildfly:miracolix-v1.3.1
     restart: unless-stopped
-    environment:
-      DWH_HOST: ${DWH_HOST:-localhost}
-      PORT_REST: ${PORT_REST_INTERNAL:-9090}
-    ports:
-      - ${PORT_WEBUI:-380}:80
     volumes:
-      - ./http/entrypoint/entrypoint-dev.sh:/etc/init.d/entrypoint.sh
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost/webclient"]
-      interval: 50s
-      timeout: 10s
-      retries: 5
+      - ./crc.properties:/opt/jboss/wildfly/standalone/configuration/crcapp/crc.properties:ro
+    ports:
+      - "${PORT_I2B2_WILDFLY_HTTP:-8080}:8080"
+      - "${PORT_I2B2_WILDFLY_CLI:-9990}:9990"
     depends_on:
-      - i2b2-app
+      - i2b2-pg
+
+  i2b2-pg:
+    container_name: i2b2pg
+    image: docker.miracum.org/i2b2/i2b2-pg:miracolix-v1.3.3
+    restart: unless-stopped
+    ports:
+      - "${PORT_I2B2_DB:-25432}:5432"
+    volumes:
+      - pg-data-volume:/var/lib/postgresql/9.4/main
 
 volumes:
-  i2b2_tblspc: {}
+  pg-data-volume:

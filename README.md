@@ -12,13 +12,14 @@ This repository contains the deployment package for the CODEX NUM-Knoten.
 
 `$ sh stop-single-host-environment.sh`
 
-### URLs
+### URLs and Default Credentials
 
-|                                       |                                                |
-|---------------------------------------|------------------------------------------------|
-| FHIR-GW API URL                       | <http://localhost:18080/fhir>                  |
-| FHIR-GW DB JDBC URL                   | <jdbc:postgresql://localhost:15432/fhir>       |
-| gPAS SOAP API Endpoint                | <http://localhost:18081/gpas/gpasService?wsdl> |
-| gPAS Domain Service SOAP API Endpoint | <http://localhost:18081/gpas/DomainService>    |
-| gPAS Web UI                           | <http://localhost:18081/gpas-web>              |
-| i2b2 Web UI                           | <http://localhost:380/webclient/>              |
+| Component                    | URL                                              | Default User | Default Password |
+|------------------------------|--------------------------------------------------|--------------|------------------|
+| FHIR-GW API                  | <http://localhost:18080/fhir>                    | -            | -                |
+| FHIR-GW DB JDBC              | <jdbc:postgresql://localhost:15432/fhir>         | postgres     | postgres         |
+| gPAS SOAP API                | <http://localhost:18081/gpas/gpasService?wsdl>   | -            | -                |
+| gPAS Domain Service SOAP API | <http://localhost:18081/gpas/DomainService?wsdl> | -            | -                |
+| gPAS Web UI                  | <http://localhost:18081/gpas-web>                | -            | -                |
+| i2b2 Web UI                  | <http://localhost/webclient/>                    | miracum      | demouser         |
+| i2b2 DB JDBC                 | <jdbc:postgresql://localhost:25432/i2b2>         | i2b2         | demouser         |
