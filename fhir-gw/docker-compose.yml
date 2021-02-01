@@ -62,6 +62,8 @@ services:
         -Djava.awt.headless=true
     ports:
       - ${PORT_GPAS:-18081}:8080
+    volumes:
+      - gpas-data:/var/lib/mysql
 
   gpasinit-patient:
     image: curlimages/curl:7.74.0
@@ -145,3 +147,4 @@ services:
 
 volumes:
   fhir-gateway-data: {}
+  gpas-data: {}

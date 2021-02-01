@@ -1,0 +1,37 @@
+services:
+  i2b2-2web:
+    container_name: i2b2web
+    image: docker.miracum.org/i2b2/i2b2-web:miracolix-v1.3.0
+    restart: unless-stopped
+    ports:
+      - "${PORT_I2B2_WEB_HTTP:-80}:80"
+      - "${PORT_I2B2_WEB_HTTPS:-443}:443"
+    command: /run-httpd.sh localhost
+    volumes:
+      - ./i2b2_config_data.js:/var/www/html/webclient/i2b2_config_data.js:ro
+    depends_on:
+      - i2b2-wildfly
+
+  i2b2-wildfly:
+    container_name: i2b2wildfly
+    image: docker.miracum.org/i2b2/i2b2-wildfly:miracolix-v1.3.1
+    restart: unless-stopped
+    volumes:
+      - ./crc.properties:/opt/jboss/wildfly/standalone/configuration/crcapp/crc.properties:ro
+    ports:
+      - "${PORT_I2B2_WILDFLY_HTTP:-8080}:8080"
+      - "${PORT_I2B2_WILDFLY_CLI:-9990}:9990"
+    depends_on:
+      - i2b2-pg
+
+  i2b2-pg:
+    container_name: i2b2pg
+    image: docker.miracum.org/i2b2/i2b2-pg:miracolix-v1.3.3
+    restart: unless-stopped
+    ports:
+      - "${PORT_I2B2_DB:-25432}:5432"
+    volumes:
+      - pg-data-volume:/var/lib/postgresql/9.4/main
+
+volumes:
+  pg-data-volume:
