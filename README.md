@@ -6,7 +6,7 @@ Currently, this is v1.9beta and does contain all of the planned components (e.g.
 
 ![NUM-Knoten v1.9beta](img/num-codex-ap6-nk1.9beta_v5.png)
 
-## Deployment on single host
+## Deployment on Single Host
 
 ### Start
 
@@ -14,17 +14,19 @@ Currently, this is v1.9beta and does contain all of the planned components (e.g.
 
 ### Stop
 
-`$ sh 03_stop-single-host-environment.sh`
+`$ sh 02_stop-single-host-environment.sh`
 
 ### Test
 
-#### Test from odm2fhir on
-
-tbd
-
 #### Test from FHIR-GW on
 
-`$ sh 02_send-test-resource.sh`
+`$ sh 03_send-test-resource-to-fhir-gw.sh`
+
+#### Test from odm2fhir on
+
+The default settings use test-data in odm2fhir. To execute with real data, please set up odm2fhir/docker-compose.yml according to the documentation on <https://github.com/num-codex/odm2fhir/packages/496804>.
+
+`$ sh 04_execute-odm2fhir.sh`
 
 ### URLs and Default Credentials
 
