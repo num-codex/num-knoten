@@ -6,11 +6,21 @@ This repository contains the deployment package for the CODEX NUM-Knoten.
 
 ### Start
 
-`$ sh start-single-host-environment.sh`
+`$ sh 01_start-single-host-environment.sh`
 
 ### Stop
 
-`$ sh stop-single-host-environment.sh`
+`$ sh 03_stop-single-host-environment.sh`
+
+### Test
+
+#### Test from odm2fhir on
+
+tbd
+
+#### Test from FHIR-GW on
+
+`$ sh 02_send-test-resource.sh`
 
 ### URLs and Default Credentials
 

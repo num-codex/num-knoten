@@ -18,4 +18,4 @@ services:
       # CRON: ${CRON:-"0 0 0 0 * *"}
     volumes:
       # - ${ODM_FILE_PATH}:/workspace/input/ODM.xml
-      - ${FHIR_BUNDLES_FOLDER_PATH}:/workspace/output
+      - ${FHIR_BUNDLES_FOLDER_PATH:-./out}:/workspace/output
