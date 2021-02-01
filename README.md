@@ -2,7 +2,7 @@
 
 This repository contains the deployment package for the CODEX NUM-Knoten.
 
-Currently, this is v1.9beta and does contain all of the planned components (e.g. no GECCO-Merger that merges data from EDC and clinical source systems).
+Currently, this is **v1.9beta** and does not contain all of the planned components (e.g. no GECCO-Merger that merges data from EDC and clinical source systems).
 
 ![NUM-Knoten v1.9beta](img/num-codex-ap6-nk1.9beta_v5.png)
 
