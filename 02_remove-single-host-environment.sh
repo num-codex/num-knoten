@@ -1,5 +1,6 @@
 #!/bin/bash
 
+export COMPOSE_IGNORE_ORPHANS=True
 export COMPOSE_PROJECT=num-knoten
 
 docker-compose -p $COMPOSE_PROJECT -f fhir-gw/docker-compose.yml down

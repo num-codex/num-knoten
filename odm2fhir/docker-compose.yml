@@ -7,7 +7,7 @@ services:
     environment:
       ODM.REDCAP.API.URL: ${ODM_REDCAP_API_URL}
       ODM.REDCAP.API.TOKEN: ${ODM_REDCAP_API_TOKEN}
-      FHIR.SERVER.URL: ${FHIR_SERVER_URL:-http://fhir-gateway:8080/fhir}
+      FHIR.SERVER.URL: ${FHIR_SERVER_URL:-http://fhir-gateway:8080/fhir} # Comment line for output in local file system (./out)
       FHIR.SERVER.BASICAUTH.USERNAME: ${FHIR_SERVER_BASICAUTH_USERNAME}
       FHIR.SERVER.BASICAUTH.PASSWORD: ${FHIR_SERVER_BASICAUTH_PASSWORD}
       FHIR.SERVER.OAUTH2.TOKEN.URL: ${FHIR_SERVER_OAUTH2_TOKEN_URL}
@@ -16,4 +16,4 @@ services:
       # CRON: ${CRON:-"0 0 0 0 * *"}
     volumes:
       - ${ODM_FILE_PATH:-./test-odm.xml}:/workspace/input/ODM.xml
-      # - ${FHIR_BUNDLES_FOLDER_PATH:-./out}:/workspace/output
+      - ${FHIR_BUNDLES_FOLDER_PATH:-./out}:/workspace/output # This is only used if fhir.server.url ist commented out
