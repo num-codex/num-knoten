@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<ODM xmlns="http://www.cdisc.org/ns/odm/v1.3" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:redcap="https://projectredcap.org" xsi:schemaLocation="http://www.cdisc.org/ns/odm/v1.3 schema/odm/ODM1-3-1.xsd" ODMVersion="1.3.1" FileOID="000-00-0000" FileType="Snapshot" Description="GECCO_TEST (2021-01-14)" AsOfDateTime="2021-02-01T16:09:07" CreationDateTime="2021-02-01T16:09:07" SourceSystem="REDCap" SourceSystemVersion="10.0.19">
-<ClinicalData StudyOID="Project.GECCOTEST20210114" MetaDataVersionOID="Metadata.GECCOTEST20210114_2021-02-01_1609">
+<ODM xmlns="http://www.cdisc.org/ns/odm/v1.3" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:redcap="https://projectredcap.org" xsi:schemaLocation="http://www.cdisc.org/ns/odm/v1.3 schema/odm/ODM1-3-1.xsd" ODMVersion="1.3.1" FileOID="000-00-0000" FileType="Snapshot" Description="GECCO_TEST (2021-01-14)" AsOfDateTime="2021-02-02T09:48:43" CreationDateTime="2021-02-02T09:48:43" SourceSystem="REDCap" SourceSystemVersion="10.0.19">
+<ClinicalData StudyOID="Project.GECCOTEST20210114" MetaDataVersionOID="Metadata.GECCOTEST20210114_2021-02-02_0948">
 	<SubjectData SubjectKey="2" redcap:RecordIdField="record_id">
 			<FormData FormOID="Form.krankheitsbeginn_aufnahme" FormRepeatKey="1">
 				<ItemGroupData ItemGroupOID="krankheitsbeginn_aufnahme.record_id" ItemGroupRepeatKey="1">
@@ -1168,7 +1168,7 @@
 				</ItemGroupData>
 				<ItemGroupData ItemGroupOID="demographie.alter_code" ItemGroupRepeatKey="1">
 					<ItemData ItemOID="alter_code" Value="2.16.840.1.113883.6.1_30525-0__2.16.840.1.113883.6.96_424144002"/>
-					<ItemData ItemOID="alter" Value="36"/>
+					<ItemData ItemOID="alter" Value=""/>
 				</ItemGroupData>
 				<ItemGroupData ItemGroupOID="demographie.frailtyscore_code" ItemGroupRepeatKey="1">
 					<ItemData ItemOID="frailtyscore_code" Value="2.16.840.1.113883.6.96_763264000"/>
@@ -1395,7 +1395,7 @@
 				</ItemGroupData>
 				<ItemGroupData ItemGroupOID="vitalparameter.p_hwert_code" ItemGroupRepeatKey="1">
 					<ItemData ItemOID="p_hwert_code" Value="2.16.840.1.113883.6.1_2753-2__2.16.840.1.113883.6.1_2746-6__2.16.840.1.113883.6.1_2745-8__2.16.840.1.113883.6.1_2744-1__2.16.840.1.113883.6.1_19213-8__2.16.840.1.113883.6.1_11558-4"/>
-					<ItemData ItemOID="p_hwert" Value="6.9"/>
+					<ItemData ItemOID="p_hwert" Value="6,9"/>
 				</ItemGroupData>
 				<ItemGroupData ItemGroupOID="vitalparameter.sofascore_code" ItemGroupRepeatKey="1">
 					<ItemData ItemOID="sofascore_code" Value=""/>
@@ -1413,7 +1413,7 @@
 					<ItemData ItemOID="sofa_score_coa_calc" Value="3"/>
 					<ItemData ItemOID="sofa_score_kid" Value="sofa_kid2"/>
 					<ItemData ItemOID="sofa_score_kid_calc" Value="2"/>
-					<ItemData ItemOID="sofa_total_score" Value="2.1666666666666665"/>
+					<ItemData ItemOID="sofa_total_score" Value="13"/>
 				</ItemGroupData>
 				<ItemGroupData ItemGroupOID="vitalparameter.atemfrequenz_unit" ItemGroupRepeatKey="1">
 					<ItemData ItemOID="atemfrequenz_unit" Value="1"/>
@@ -1448,7 +1448,7 @@
 				</ItemGroupData>
 				<ItemGroupData ItemGroupOID="vitalparameter.korpertemperatur_code" ItemGroupRepeatKey="1">
 					<ItemData ItemOID="korpertemperatur_code" Value="2.16.840.1.113883.6.1_8310-5__2.16.840.1.113883.6.96_386725007"/>
-					<ItemData ItemOID="korpertemperatur" Value="40.9"/>
+					<ItemData ItemOID="korpertemperatur" Value="40,9"/>
 				</ItemGroupData>
 				<ItemGroupData ItemGroupOID="vitalparameter.periphere_sauerstoffsattigung_unit" ItemGroupRepeatKey="1">
 					<ItemData ItemOID="periphere_sauerstoffsattigung_unit" Value="1"/>
