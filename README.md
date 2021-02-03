@@ -4,6 +4,8 @@ This repository contains the deployment package for the CODEX NUM-Knoten.
 
 Currently, this is **v1.9beta** and does not contain all of the planned components (e.g. no GECCO-Merger that merges data from EDC and clinical source systems).
 
+When running the *.sh-Files on a Windows machine, please use the variants that are suffixed with "-win.sh".
+
 ![NUM-Knoten v1.9beta](img/num-codex-ap6-nk1.9beta_v5.png)
 
 ## Deployment on Single Host
@@ -27,6 +29,13 @@ Currently, this is **v1.9beta** and does not contain all of the planned componen
 `$ sh 04_execute-odm2fhir.sh`
 
 Note: The default settings use test-data in odm2fhir. To execute with real data, please set up odm2fhir/docker-compose.yml according to the documentation on <https://github.com/num-codex/odm2fhir/packages/496804>.
+
+#### Test i2b2 data integration via "i2b2 FHIR Trigger"
+
+`$ sh 05_execute-fhir2i2b2.sh`
+
+This should populate the i2b2 tables with data from the FHIR resources, in particular OBSERVATION_FACT, PATIENT_MAPPING, and PATIENT_DIMENSION. Also check table FHIR_ELT_LOG for potenial error messages.
+
 
 ### URLs and Default Credentials
 

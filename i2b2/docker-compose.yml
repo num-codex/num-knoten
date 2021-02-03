@@ -33,6 +33,9 @@ services:
     volumes:
       - pg-data-volume:/var/lib/postgresql/9.4/main
       - ./create-fdw.sql:/create-fdw.sql:ro
-
+      - ./i2b2-FHIR-Trigger.sql:/i2b2-FHIR-Trigger.sql:ro
+      - ./i2b2Ontology.sql:/i2b2Ontology.sql:ro
+      - ./Postprocessing.sql:/Postprocessing.sql:ro
+      
 volumes:
   pg-data-volume:
