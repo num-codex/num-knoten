@@ -32,10 +32,8 @@ services:
       - "${PORT_I2B2_DB:-25432}:5432"
     volumes:
       - pg-data-volume:/var/lib/postgresql/9.4/main
-      - ./create-fdw.sql:/create-fdw.sql:ro
-      - ./i2b2-FHIR-Trigger.sql:/i2b2-FHIR-Trigger.sql:ro
-      - ./i2b2Ontology.sql:/i2b2Ontology.sql:ro
-      - ./Postprocessing.sql:/Postprocessing.sql:ro
-      
+      - ./prescript.sh:/prescript.sh
+      - ./fhir-to-i2b2-trigger:/fhir-to-i2b2:ro
+
 volumes:
   pg-data-volume:
