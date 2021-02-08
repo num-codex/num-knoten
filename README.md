@@ -42,6 +42,8 @@ Note: The default settings use test-data in odm2fhir. To execute with real data,
 
 ### Test i2b2 data integration via "i2b2 FHIR Trigger Beta"
 
+After odm2fhir terminated successfully, the fhir-to-i2b2 job can be set up and executed:
+
 `$ sh 05_execute-fhir-to-i2b2.sh`
 
 This should populate the i2b2 tables with data from the FHIR resources, in particular OBSERVATION_FACT, PATIENT_MAPPING, and PATIENT_DIMENSION. Also check table FHIR_ELT_LOG for potenial error messages.
