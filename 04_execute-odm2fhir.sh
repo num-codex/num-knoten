@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 export COMPOSE_PROJECT=num-knoten
 
