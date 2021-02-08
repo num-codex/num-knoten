@@ -74,3 +74,9 @@ ODM_REDCAP_API_URL=https://redcap.uk-mittelerde.de/api/
 | gPAS Web UI                  | <http://localhost:18081/gpas-web>                | -            | -                |
 | i2b2 Web UI                  | <http://localhost/webclient/>                    | miracum      | demouser         |
 | i2b2 DB JDBC                 | <jdbc:postgresql://localhost:25432/i2b2>         | i2b2         | demouser         |
+
+## Clear FHIR-DB
+
+If necessary, the FHIR-DB can be cleared by truncating the PostgreSQL database's table 'resources'. Therefore use the following script:
+
+`$ sh 06_clear-fhir-db.sh`
