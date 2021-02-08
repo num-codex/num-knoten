@@ -32,13 +32,13 @@ You can test the pipeline without odm2fhir by sending a FHIR resource directly t
 
 `$ sh 03_send-test-resource-to-fhir-gw.sh`
 
-### Execute (and Test) from odm2fhir on
+### Execute/Test from odm2fhir on
 
-You can test the whole pipeline by simply executing odm2fhir when the environment is up (succeeding components trigger automatically):
+You can test the pipeline from EDC/odm2fhir on by simply executing odm2fhir when the environment is up:
 
 `$ sh 04_execute-odm2fhir.sh`
 
-Note: The default settings use test-data in odm2fhir. To execute with real data, please set up odm2fhir/docker-compose.yml according to the documentation on <https://github.com/num-codex/odm2fhir/packages/496804>.
+Note: The default settings use test-data in odm2fhir. To execute with real data, please set up odm2fhir according to the documentation on <https://github.com/num-codex/odm2fhir/packages/496804>. (Which sould be 1) Setting both, `ODM_REDCAP_API_TOKEN` and `ODM_REDCAP_API_URL` according to your EDC and 2) Comment out line 18 in `odm2fhir/docker-compose.yml`)
 
 ### Test i2b2 data integration via "i2b2 FHIR Trigger"
 
@@ -49,6 +49,10 @@ This should populate the i2b2 tables with data from the FHIR resources, in parti
 You can also query these data with the i2b2 webclient. Go to http://localhost/webclient/ with a browser, and log in with user "miracum" and password "demouser". Use your mouse/trackpad to click on "Login" (pressing the return key may not work). You can now query for e.g. "Diagnosen" or "Forschungsdatensatz GECCO => GECCO => Anamnese / Risikofaktoren", which should return a result other than zero, as shown in the screenshot below. Note that the patient count fluctuates for each query due to the obsfuscation built into i2b2 (to improve patient privacy). Not that queries for other concepts may not return a result ("< 3" is displayed) because the demo data included it so small.
 
 ![i2b2 Query Result](img/i2b2-result.png)
+
+## Configuration
+
+Generally you can set configuration environment variables by putting them in a `.env` file next to the according `docker-compose.yml` file in the component's subfolder.
 
 ## URLs and Default Credentials
 
