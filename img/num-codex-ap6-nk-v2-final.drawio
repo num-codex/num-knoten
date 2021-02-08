@@ -1,4 +1,4 @@
-<mxfile host="65bd71144e" modified="2021-02-08T16:07:41.808Z" agent="5.0 (Macintosh; Intel Mac OS X 11_1_0) AppleWebKit/537.36 (KHTML, like Gecko) Code/1.53.0 Chrome/87.0.4280.141 Electron/11.2.1 Safari/537.36" etag="nBpyNPFkPczTNZ-GWYpu" version="13.10.0" type="embed">
+<mxfile host="65bd71144e" modified="2021-02-08T16:10:17.991Z" agent="5.0 (Macintosh; Intel Mac OS X 11_1_0) AppleWebKit/537.36 (KHTML, like Gecko) Code/1.53.0 Chrome/87.0.4280.141 Electron/11.2.1 Safari/537.36" etag="WHBXVaSmp8RDGAuAQQ2w" version="13.10.0" type="embed">
     <diagram id="jGCV98gVly2-MNFm8NOj" name="Page-1">
         <mxGraphModel dx="1608" dy="638" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1800" pageHeight="800" math="0" shadow="0">
             <root>
@@ -308,6 +308,22 @@
                 </mxCell>
                 <mxCell id="8" value="Data from clinical systems can be integrated parallel to EDC (A) or consolidated in EDC (B)" style="shape=callout;whiteSpace=wrap;html=1;perimeter=calloutPerimeter;align=center;rotation=0;base=5;size=90;position=0.88;position2=0.95;flipH=0;" vertex="1" parent="1">
                     <mxGeometry x="15" y="120" width="185" height="150" as="geometry"/>
+                </mxCell>
+                <mxCell id="9" value="" style="endArrow=classic;html=1;curved=1;startArrow=classic;startFill=1;" edge="1" parent="1" source="Zt5BA39hv14aOKBqLXmp-8" target="Zt5BA39hv14aOKBqLXmp-32">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="790" y="330" as="sourcePoint"/>
+                        <mxPoint x="840" y="280" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="630" y="10"/>
+                            <mxPoint x="1000" y="10"/>
+                            <mxPoint x="1160" y="40"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="10" value="Lookup for 3-way Merge" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="9">
+                    <mxGeometry x="0.3322" y="-2" relative="1" as="geometry">
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
                 </mxCell>
             </root>
         </mxGraphModel>
