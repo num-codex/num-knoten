@@ -56,6 +56,13 @@ You can also query these data with the i2b2 webclient. Go to i2b2 Webclient (see
 
 Generally you can set configuration environment variables by putting them in a `.env` file next to the according `docker-compose.yml` file in the component's subfolder.
 
+Example (`odm2fhir/.env`):
+
+```
+ODM_REDCAP_API_TOKEN=ABCDEFGHIJKLMNOPQRSTUVWXYZ
+ODM_REDCAP_API_URL=https://redcap.uk-mittelerde.de/api/
+```
+
 ## URLs and Default Credentials
 
 | Component                    | URL                                              | Default User | Default Password |
