@@ -1,6 +1,6 @@
-<mxfile host="65bd71144e" modified="2021-02-08T14:04:58.155Z" agent="5.0 (Macintosh; Intel Mac OS X 11_1_0) AppleWebKit/537.36 (KHTML, like Gecko) Code/1.53.0 Chrome/87.0.4280.141 Electron/11.2.1 Safari/537.36" etag="cTGODrm3sQYDeNB2d10P" version="13.10.0" type="embed">
+<mxfile host="65bd71144e" modified="2021-02-08T16:07:41.808Z" agent="5.0 (Macintosh; Intel Mac OS X 11_1_0) AppleWebKit/537.36 (KHTML, like Gecko) Code/1.53.0 Chrome/87.0.4280.141 Electron/11.2.1 Safari/537.36" etag="nBpyNPFkPczTNZ-GWYpu" version="13.10.0" type="embed">
     <diagram id="jGCV98gVly2-MNFm8NOj" name="Page-1">
-        <mxGraphModel dx="1647" dy="638" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1800" pageHeight="800" math="0" shadow="0">
+        <mxGraphModel dx="1608" dy="638" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1800" pageHeight="800" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -144,15 +144,15 @@
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 <mxCell id="Zt5BA39hv14aOKBqLXmp-46" value="EDC" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;fontSize=12;align=center;" parent="1" vertex="1">
-                    <mxGeometry x="80" y="352.5" width="80" height="100" as="geometry"/>
+                    <mxGeometry x="70" y="440" width="80" height="100" as="geometry"/>
                 </mxCell>
                 <mxCell id="Zt5BA39hv14aOKBqLXmp-47" value="" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=middle;html=1;outlineConnect=0;fontSize=12;align=center;" parent="1" vertex="1">
-                    <mxGeometry x="25" y="372.5" width="30" height="60" as="geometry"/>
+                    <mxGeometry x="15" y="460" width="30" height="60" as="geometry"/>
                 </mxCell>
                 <mxCell id="Zt5BA39hv14aOKBqLXmp-49" value="" style="endArrow=classic;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="Zt5BA39hv14aOKBqLXmp-47" target="Zt5BA39hv14aOKBqLXmp-46" edge="1">
                     <mxGeometry width="50" height="50" relative="1" as="geometry">
-                        <mxPoint x="415" y="172.5" as="sourcePoint"/>
-                        <mxPoint x="465" y="122.5" as="targetPoint"/>
+                        <mxPoint x="405" y="260" as="sourcePoint"/>
+                        <mxPoint x="455" y="210" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
                 <mxCell id="Zt5BA39hv14aOKBqLXmp-52" value="" style="endArrow=classic;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="Zt5BA39hv14aOKBqLXmp-51" target="Zt5BA39hv14aOKBqLXmp-2" edge="1">
@@ -176,10 +176,10 @@
                     </mxGeometry>
                 </mxCell>
                 <mxCell id="Zt5BA39hv14aOKBqLXmp-51" value="*-to-fhir" style="shape=mxgraph.bpmn.service_task;html=1;outlineConnect=0;labelPosition=center;verticalLabelPosition=top;align=center;verticalAlign=bottom;" parent="1" vertex="1">
-                    <mxGeometry x="220" y="229.5" width="100" height="100.5" as="geometry"/>
+                    <mxGeometry x="220" y="229.75" width="100" height="100.5" as="geometry"/>
                 </mxCell>
                 <mxCell id="Zt5BA39hv14aOKBqLXmp-58" value="" style="group;" parent="1" vertex="1" connectable="0">
-                    <mxGeometry x="40" y="209" width="120" height="120.5" as="geometry"/>
+                    <mxGeometry x="40" y="209.75" width="120" height="120.5" as="geometry"/>
                 </mxCell>
                 <mxCell id="Zt5BA39hv14aOKBqLXmp-55" value="Clinical Source Systems" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" parent="Zt5BA39hv14aOKBqLXmp-58" vertex="1">
                     <mxGeometry width="100" height="100.5" as="geometry"/>
@@ -193,8 +193,13 @@
                 <mxCell id="Zt5BA39hv14aOKBqLXmp-59" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="Zt5BA39hv14aOKBqLXmp-57" target="Zt5BA39hv14aOKBqLXmp-51" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
+                <mxCell id="6" value="A" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="Zt5BA39hv14aOKBqLXmp-59">
+                    <mxGeometry x="-0.2346" y="-2" relative="1" as="geometry">
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
                 <mxCell id="Zt5BA39hv14aOKBqLXmp-62" value="odm-to-fhir" style="shape=mxgraph.bpmn.service_task;html=1;outlineConnect=0;labelPosition=center;verticalLabelPosition=top;align=center;verticalAlign=bottom;" parent="1" vertex="1">
-                    <mxGeometry x="220" y="355" width="100" height="95" as="geometry"/>
+                    <mxGeometry x="220" y="442.5" width="100" height="95" as="geometry"/>
                 </mxCell>
                 <mxCell id="Zt5BA39hv14aOKBqLXmp-66" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;" parent="1" source="Zt5BA39hv14aOKBqLXmp-62" edge="1">
                     <mxGeometry relative="1" as="geometry">
@@ -215,7 +220,7 @@
                     <mxGeometry x="1300" y="495" width="190" height="100" as="geometry"/>
                 </mxCell>
                 <mxCell id="Zt5BA39hv14aOKBqLXmp-82" value="0%-100% of data elements via EDC enrich data from clinical source systems" style="whiteSpace=wrap;html=1;shape=mxgraph.basic.cloud_callout;align=center;flipH=1;direction=west;labelPosition=center;verticalLabelPosition=middle;verticalAlign=middle;spacingTop=30;" parent="1" vertex="1">
-                    <mxGeometry x="290" y="452.5" width="280" height="100" as="geometry"/>
+                    <mxGeometry x="290" y="540" width="280" height="100" as="geometry"/>
                 </mxCell>
                 <mxCell id="Zt5BA39hv14aOKBqLXmp-83" value="*-to-repo" style="shape=mxgraph.bpmn.service_task;html=1;outlineConnect=0;labelPosition=center;verticalLabelPosition=top;align=center;verticalAlign=bottom;" parent="1" vertex="1">
                     <mxGeometry x="1410" y="235" width="90" height="90" as="geometry"/>
@@ -292,6 +297,17 @@
                 </mxCell>
                 <mxCell id="4hY9-Zoo_yzl3ai_Mlpk-15" value="DSF" style="html=1;shadow=0;dashed=0;align=center;verticalAlign=middle;shape=mxgraph.arrows2.calloutArrow;dy=10;dx=20;notch=60;arrowHead=10;labelBackgroundColor=none;rotation=0;direction=east;" parent="1" vertex="1">
                     <mxGeometry x="1715" y="590" width="75" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;endFill=1;" edge="1" parent="1" source="Zt5BA39hv14aOKBqLXmp-57" target="Zt5BA39hv14aOKBqLXmp-46">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="5" value="B" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="4">
+                    <mxGeometry x="-0.1481" y="-2" relative="1" as="geometry">
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="8" value="Data from clinical systems can be integrated parallel to EDC (A) or consolidated in EDC (B)" style="shape=callout;whiteSpace=wrap;html=1;perimeter=calloutPerimeter;align=center;rotation=0;base=5;size=90;position=0.88;position2=0.95;flipH=0;" vertex="1" parent="1">
+                    <mxGeometry x="15" y="120" width="185" height="150" as="geometry"/>
                 </mxCell>
             </root>
         </mxGraphModel>
