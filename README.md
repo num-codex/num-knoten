@@ -58,7 +58,7 @@ Generally you can set configuration environment variables by putting them in a `
 
 Example (`odm2fhir/.env`):
 
-```
+```sh
 ODM_REDCAP_API_TOKEN=ABCDEFGHIJKLMNOPQRSTUVWXYZ
 ODM_REDCAP_API_URL=https://redcap.uk-mittelerde.de/api/
 ```
