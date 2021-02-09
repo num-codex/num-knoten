@@ -18,6 +18,13 @@ Note: The FHIR-GW also provides interfaces for Apache Kafka  and for filling a F
 
 ## Deployment on Single Host
 
+### System requirements
+
+Git is required to clone this repository. Docker is required to start the components. We do not provide specific
+hardware requirements, but it is recommended to monitor the resource utilization of each component and scale out accordingly.
+
+**IMPORTANT**: Make sure Docker gets enough memory. When using Windows, Docker is given only 2GB by default, which is not enough. Right-click on the docker symbol in the taskbar, go to "Resources" and set the memory to at least 5GB.
+
 ### Start Environment
 
 `$ sh 01_start-single-host-environment.sh`
