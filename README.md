@@ -6,7 +6,7 @@ This repository contains the deployment package for the CODEX NUM-Knoten.
 
 ![NUM-Knoten v2.0](img/num-codex-ap6-nk-v2.0.png)
 
-Currently, this version is an early release for testing purposes and does not contain all of the planned components (e.g. no GECCO-Merger that merges parallel data pipelines from EDC and clinical source systems).
+Currently, this version is an early release for testing purposes and does not contain all of the planned components (e.g. no GECCO-Merger that merges parallel data pipelines from EDC and clinical source systems). Also, only parts of the pipeline support incremental loading. In further development, the whole pipelines is planned to be able to load data incrementally (Delta-Update).
 
 ## Final Version (NUM-Knoten v2 final)
 
