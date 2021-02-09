@@ -1,0 +1,23 @@
+version: '3.7'
+services:
+  fhir-server:
+    container_name: fhir-server
+    image: "samply/blaze:0.11.0-alpha.2"
+    environment:
+      BASE_URL: "http://localhost:8082"
+      JAVA_TOOL_OPTIONS: "-Xmx4g"
+      LOG_LEVEL: debug
+    ports:
+    - "8082:8080"
+    volumes:
+    - "blaze-data:/app/data"
+    networks:
+      - num-node
+
+volumes:
+  blaze-data:
+
+networks:
+  num-node:
+    external: true
+    name: num-node
