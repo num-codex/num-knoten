@@ -1,0 +1,21 @@
+####################################################################
+[ req ]
+ x509_extensions = v3_req
+ distinguished_name     = req_distinguished_name
+ prompt                 = no
+[ req_distinguished_name ]
+ C                      = DE
+ CN                     = localhost
+ O                      = localhost
+ OU                     = localhost
+
+[ v3_ca ] 
+basicConstraints = CA:TRUE 
+subjectKeyIdentifier = hash 
+authorityKeyIdentifier = keyid:always,issuer:always 
+
+[v3_req]
+subjectAltName = @alt_names
+
+[alt_names]
+DNS.1 = localhost

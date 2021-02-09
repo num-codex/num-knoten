@@ -19,7 +19,7 @@ services:
       OPENTRACING_JAEGER_ENABLED: ${OPENTRACING_JAEGER_ENABLED:-false}
       OPENTRACING_JAEGER_UDP_SENDER_HOST: ${OPENTRACING_JAEGER_UDP_SENDER_HOST:-jaeger}
     ports:
-      - ${PORT_FHIR_GATEWAY:-18080}:8080
+      - ${PORT_FHIR_GATEWAY:-127.0.0.1:18080}:8080
     depends_on:
       - loinc-converter
       - fhir-db
@@ -51,7 +51,7 @@ services:
       POSTGRES_DB: ${FHIR_GATEWAY_DB_DATABASE:-fhir}
       POSTGRES_PASSWORD: ${FHIR_GATEWAY_DB_PASSWORD:-postgres}
     ports:
-      - ${PORT_FHIR_GATEWAY_DB:-15432}:5432
+      - ${PORT_FHIR_GATEWAY_DB:-127.0.0.1:15432}:5432
     volumes:
       - fhir-gateway-data:/var/lib/postgresql/data:rw
     networks:
@@ -69,7 +69,7 @@ services:
         -Djava.net.preferIPv4Stack=true
         -Djava.awt.headless=true
     ports:
-      - ${PORT_GPAS:-18081}:8080
+      - ${PORT_GPAS:-127.0.0.1:18081}:8080
     volumes:
       - gpas-data:/var/lib/mysql
     networks:

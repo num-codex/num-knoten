@@ -1,1 +1,5 @@
 .DS_Store
+
+odm2fhir/out
+node-rev-proxy/cert.pem
+node-rev-proxy/key.pem

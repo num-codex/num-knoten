@@ -4,11 +4,11 @@ services:
     container_name: fhir-server
     image: "samply/blaze:0.11.0-alpha.2"
     environment:
-      BASE_URL: "http://localhost:8082"
+      BASE_URL: "https://localhost:443"
       JAVA_TOOL_OPTIONS: "-Xmx4g"
       LOG_LEVEL: debug
     ports:
-    - "8082:8080"
+    - ${PORT_BLAZE_FHIR:-127.0.0.1:8081}:8080
     volumes:
     - "blaze-data:/app/data"
     networks:
