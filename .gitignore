@@ -1,9 +1,5 @@
 .DS_Store
 
-<<<<<<< HEAD
 odm2fhir/out
 node-rev-proxy/cert.pem
 node-rev-proxy/key.pem
-=======
-odm2fhir/out
->>>>>>> 1cff91b... fix: configure HAPI correctly, set HAPI as default server, fix README of HAPI server
