@@ -22,6 +22,7 @@ fi
 docker-compose -p $COMPOSE_PROJECT -f i2b2/docker-compose.yml up -d
 docker-compose -p $COMPOSE_PROJECT -f fhir-gw/docker-compose.yml up -d
 
+<<<<<<< HEAD
 if [ "$FHIR_SERVER" = "blaze" ]; then
     echo "Using FHIR Server Blaze"
     docker-compose -p $COMPOSE_PROJECT -f fhir-server/blaze-server/docker-compose.yml up -d
@@ -31,6 +32,10 @@ elif [ "$FHIR_SERVER" = "hapi" ]; then
 fi
 
 docker-compose -p $COMPOSE_PROJECT -f node-rev-proxy/docker-compose.yml up -d
+=======
+# docker-compose -p $COMPOSE_PROJECT -f fhir-server/blaze-server/docker-compose.yml up -d
+docker-compose -p $COMPOSE_PROJECT -f fhir-server/hapi-fhir-server/docker-compose.yml up -d
+>>>>>>> 1cff91b... fix: configure HAPI correctly, set HAPI as default server, fix README of HAPI server
 
 echo "Waiting for gPAS to come up..."
 docker wait ${COMPOSE_PROJECT}_gpasinit-patient_1 && docker wait ${COMPOSE_PROJECT}_gpasinit-fall_1

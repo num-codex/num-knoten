@@ -3,13 +3,21 @@ version: "3.7"
 services:
   fhir-server:
     container_name: fhir-server
+<<<<<<< HEAD
     # image: hapiproject/hapi:v5.1.0
     image: ghcr.io/chgl/hapi/hapi-fhir-jpaserver-starter:5.2.0-distroless
+=======
+    image: hapiproject/hapi:v5.1.0
+>>>>>>> 1cff91b... fix: configure HAPI correctly, set HAPI as default server, fix README of HAPI server
     networks:
       - num-node
     restart: always
     ports:
+<<<<<<< HEAD
       - ${PORT_HAPI_FHIR:-127.0.0.1:8082}:8080
+=======
+      - "8082:8080"
+>>>>>>> 1cff91b... fix: configure HAPI correctly, set HAPI as default server, fix README of HAPI server
     volumes:
       - ./application.yml:/data/hapi/application.yml
     environment:
