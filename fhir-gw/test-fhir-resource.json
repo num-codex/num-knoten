@@ -68,7 +68,7 @@
             },
             "request": {
                 "method": "PUT",
-                "url": "Patient\/pid.999"
+                "url": "Patient\/pid.123"
             }
         },
         {
