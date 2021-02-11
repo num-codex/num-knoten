@@ -20,10 +20,13 @@ Note: The FHIR-GW also provides interfaces for Apache Kafka  and for filling a F
 
 ### System requirements
 
-Git is required to clone this repository. Docker is required to start the components. We do not provide specific
-hardware requirements, but it is recommended to monitor the resource utilization of each component and scale out accordingly.
+- [Git](https://git-scm.com/downloads) is required to clone this repository.
+- [Docker Engine Release 19.03.0+](https://docs.docker.com/engine/install)
+- [Docker Compose 1.27.0+](https://docs.docker.com/compose/install/) if you are not using Docker Desktop for Mac/Windows
 
-**IMPORTANT**: Make sure Docker gets enough memory. When using Windows, Docker is given only 2GB by default, which is not enough. Right-click on the docker symbol in the taskbar, go to "Resources" and set the memory to at least 5GB.
+We do not provide specific hardware requirements, but it is recommended to monitor the resource utilization of each component and scale out accordingly.
+
+**IMPORTANT**: Make sure Docker gets enough memory. When using Windows, Docker is given only 2GB by default, which is not enough. Right-click on the docker symbol in the taskbar, go to "Resources" and set the memory to at least 8GB.
 
 ### Start Environment
 

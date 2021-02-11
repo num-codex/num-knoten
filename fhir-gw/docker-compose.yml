@@ -1,5 +1,3 @@
-version: "3.8"
-
 services:
   fhir-gateway:
     image: docker.miracum.org/miracum-etl/fhir-gateway:3.3.7
