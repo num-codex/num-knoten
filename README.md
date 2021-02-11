@@ -34,7 +34,12 @@ We do not provide specific hardware requirements, but it is recommended to monit
 
 ### Stop and Delete Environment
 
+**WARNING**: This also deletes all volumes, databases, pseudonym mappings and log files. Please make sure that you backup any information necessary before executing this script.
+
 `$ sh 02_remove-single-host-environment.sh`
+
+
+Note: Because of the multi component structure, there may arise some errors that state that the network cannot be removed because of active endpoints. Please ignore these error messages for now, as the network is nevertheless removed at the end of the script.
 
 ### Test from FHIR-GW on
 
