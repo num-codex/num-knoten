@@ -18,6 +18,13 @@ Note: The FHIR-GW also provides interfaces for Apache Kafka  and for filling a F
 
 ## Deployment on Single Host
 
+### Setup the Environment
+
+`$ sh 00_setup-project-environment.sh <user> <password>`
+
+This script generates a self-singed certificate for the node nginx and sets up one user to the basic auth access from outside localhost.
+You can add more users later - see the "Configure NGINX" section below.
+
 ### Start Environment
 
 `$ sh 01_start-single-host-environment.sh`
@@ -74,3 +81,54 @@ ODM_REDCAP_API_URL=https://redcap.uk-mittelerde.de/api/
 | gPAS Web UI                  | <http://localhost:18081/gpas-web>                | -            | -                |
 | i2b2 Web UI                  | <http://localhost/webclient/>                    | miracum      | demouser         |
 | i2b2 DB JDBC                 | <jdbc:postgresql://localhost:25432/i2b2>         | i2b2         | demouser         |
+| FHIR Server                  | <http://localhost:8081/fhir>                     | -            | -                |
+
+## NGINX Setup URLs and Default Credentials
+
+
+| Component                    | URL                                              | Default User | Default Password |
+|------------------------------|--------------------------------------------------|--------------|------------------|
+| FHIR-GW API                  | <https://localhost/fhir-gw/fhir>                 | -            | -                |
+| gPAS Web UI                  | <https://localhost/gpas-web>                     | -            | -                |
+| i2b2 Web UI                  | <https://localhost/i2b2>                         | miracum      | demouser         |
+| FHIR Server                  | <https://localhost/fhir>                         | -            | -                |
+
+
+For the URLs above substitude "localhost" with your server ip or domain accordingly
+The NGINX Setup protects the node with basic auth. This has to be configured and users created accordingly (see Setup NGINX below)
+
+
+## Configure NGINX
+
+### Using your own NGINX
+
+You can also setup your own NGINX/Proxy. To disable the default NGINX set the following environment variable NGINX_PROXY_ENABLED to false (`export NGINX_PROXY_ENABLED=true`) before exexuting the
+`$ sh 01_start-single-host-environment.sh` script.
+
+In case you have already started up the environment, execute `$ sh 02_remove-single-host-environment.sh` and then execute `$ sh 01_start-single-host-environment.sh` again.
+
+### Add your own certificate
+
+This project generates its own (self-signed) certificate for the NGINX to use. 
+This certificate is needed to enable https for the NGINX and encrypt the communication.
+When deploying the certificate should be switched for ones own certificate, to do this follow these steps:
+
+1. Request a domain and certificate for your num node from your 
+2. Exchange the cert.pem and key.pem files in the node-rev-proxy folder for your own (Ensure that the file names stay the same)
+3. Execute the `$ sh reset-nginx.sh`
+
+### Add additional users
+
+To add additional users go into the node-rev-proxy folder of this repository `$ cd node-rev-proxy`
+and exexute the `$ sh add-nginx-user.sh <user> <password>`.
+This adds a user to the .htpasswd file, which is mounted to the nginx.
+
+
+## Choose a FHIR Server
+
+This repository allows you to choose between two FHIR Servers (HAPI and Blaze). To configure which one to use, set the FHIR_SERVER variable accordingly,
+to either `hapi`or `blaze`. The default server is HAPI.
+Example for using blaze: `export FHIR_SERVER=blaze`
+
+
+
