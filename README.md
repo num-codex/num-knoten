@@ -1,6 +1,6 @@
 # NUM-Knoten v2
 
-This repository contains the deployment package for the CODEX NUM-Knoten.
+Deployment package for the CODEX NUM-Knoten v2
 
 ## Current Version (NUM-Knoten v2.0)
 
