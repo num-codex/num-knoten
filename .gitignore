@@ -5,3 +5,4 @@ odm2fhir/out
 node-rev-proxy/cert.pem
 node-rev-proxy/key.pem
 node-rev-proxy/.htpasswd
+node-rev-proxy/dhparam.pem

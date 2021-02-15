@@ -123,11 +123,10 @@ In case you have already started up the environment, execute `$ sh 02_remove-sin
 
 This project generates its own (self-signed) certificate for the nginx to use.
 This certificate is needed to enable https for the nginx and encrypt the communication.
-For productive deployment, the certificate should be switched for an own certificate. To do this, follow these steps:
+For productive deployment, the certificate should be subsituted with an own trusted certificate. To do this, follow these steps:
 
-1. Request a domain and certificate for your num node from your
-2. Exchange the `cert.pem` and `key.pem` files in the `node-rev-proxy` direcotry for your own (Ensure that the file names stay the same)
-3. Execute the `$ sh reset-nginx.sh`
+1. Exchange the `cert.pem` and `key.pem` files in the `node-rev-proxy` direcotry for your own (Ensure that the file names stay the same)
+2. Execute the `$ sh reset-nginx.sh`
 
 ### Add additional users
 
