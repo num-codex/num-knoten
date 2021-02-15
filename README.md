@@ -30,12 +30,14 @@ We do not provide specific hardware requirements, but it is recommended to monit
 
 ### Setup the Environment
 
-Please be aware of the nginx setup stated in section [Setup nginx](#setup-nginx).
+Please be aware of the nginx setup described in section [Setup nginx](#setup-nginx). You can also disable provided nginx reverse proxy setup at all (or substitute with your own). Be aware, that by default all ports to the different interfaces are only exposed to localhost. (Compare regarding `docker-compose.yml` manifests)
 
 `$ sh 00_setup-project-environment.sh <user> <password>`
 
-This script generates a self-singed certificate for the node nginx and sets up one user to the basic auth access from outside localhost.
-You can add more users later (see the [Setup nginx](#setup-nginx) section below).
+This script generates a self-signed certificate for the node nginx and sets up one user to the basic auth access from outside localhost.
+You can add more users or use your own certificate (see the [Setup nginx](#setup-nginx) section below).
+
+Note: Please be aware that the selfsigned certificate needs a browser like Firefox that allows to bypass security warnings regarding invalid certificates.
 
 ### Start Environment
 
@@ -88,6 +90,8 @@ ODM_REDCAP_API_URL=https://redcap.uk-mittelerde.de/api/
 
 ## URLs and Default Credentials
 
+The following URLs work with access on the localhost. For access from outside, please be aware of the nginx setup (see also next sections).
+
 | Component                    | URL                                              | Default User | Default Password |
 |------------------------------|--------------------------------------------------|--------------|------------------|
 | FHIR-GW API                  | <http://localhost:18080/fhir>                    | -            | -                |
@@ -101,6 +105,8 @@ ODM_REDCAP_API_URL=https://redcap.uk-mittelerde.de/api/
 
 ## nginx Setup URLs and Default Credentials
 
+These are the URLs for access to the webclients via nginx.
+
 | Component   | URL                              | Default User | Default Password |
 |-------------|----------------------------------|--------------|------------------|
 | FHIR-GW API | <https://localhost/fhir-gw/fhir> | -            | -                |
@@ -108,8 +114,8 @@ ODM_REDCAP_API_URL=https://redcap.uk-mittelerde.de/api/
 | i2b2 Web UI | <https://localhost/i2b2>         | miracum      | demouser         |
 | FHIR Server | <https://localhost/fhir>         | -            | -                |
 
-For the URLs above substitude "localhost" with your server ip or domain accordingly
-The nginx Setup protects the node with basic auth. This has to be configured and users created accordingly (see Setup nginx below)
+For the URLs above, substitude "localhost" with your server ip or domain accordingly.
+The nginx setup protects the node with HTTP basic auth. This has to be configured and users need to be created accordingly (see Setup nginx below).
 
 ## Setup nginx
 
@@ -121,9 +127,7 @@ In case you have already started up the environment, execute `$ sh 02_remove-sin
 
 ### Add your own certificate
 
-This project generates its own (self-signed) certificate for the nginx to use.
-This certificate is needed to enable https for the nginx and encrypt the communication.
-For productive deployment, the certificate should be subsituted with an own trusted certificate. To do this, follow these steps:
+This project generates its own (self-signed) certificate for the nginx to use. This certificate is needed to enable https for the nginx and encrypt the communication. For productive deployment, the certificate should be subsituted with an own trusted certificate. To do this, follow these steps:
 
 1. Exchange the `cert.pem` and `key.pem` files in the `node-rev-proxy` direcotry for your own (Ensure that the file names stay the same)
 2. Execute the `$ sh reset-nginx.sh`
@@ -131,13 +135,11 @@ For productive deployment, the certificate should be subsituted with an own trus
 ### Add additional users
 
 To add additional users go into the `node-rev-proxy` directory of this repository `$ cd node-rev-proxy`
-and exexute the `$ sh add-nginx-user.sh <user> <password>`.
-This adds a user to the `.htpasswd` file, which is mounted into the nginx.
+and exexute the `$ sh add-nginx-user.sh <user> <password>`. This adds a user to the `.htpasswd` file, which is mounted into the nginx.
 
 ## Choose a FHIR Server
 
-This repository allows you to choose between two FHIR Servers (HAPI and Blaze). To configure which one to use, set the `FHIR_SERVER` variable accordingly,
-to either `hapi`or `blaze`. The default server is HAPI.
+This repository allows you to choose between two FHIR Servers (HAPI and Blaze). To configure which one to use, set the `FHIR_SERVER` variable accordingly, to either `hapi`or `blaze`. The default server is HAPI.
 
 ## Clear FHIR-DB
 
