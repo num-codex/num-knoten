@@ -119,20 +119,20 @@ The nginx setup protects the node with HTTP basic auth. This has to be configure
 
 ## Setup nginx
 
-### Using your own nginx
+### Using Your Own nginx
 
 You can also setup your own reverse proxy. To disable the default nginx, set the  environment variable `NGINX_PROXY_ENABLED` to `false` before exexuting the `$ sh 01_start-single-host-environment.sh` script.
 
 In case you have already started up the environment, execute `$ sh 02_remove-single-host-environment.sh` and then execute `$ sh 01_start-single-host-environment.sh` again.
 
-### Add your own certificate
+### Add Your Own Certificate
 
 This project generates its own (self-signed) certificate for the nginx to use. This certificate is needed to enable https for the nginx and encrypt the communication. For productive deployment, the certificate should be subsituted with an own trusted certificate. To do this, follow these steps:
 
 1. Exchange the `cert.pem` and `key.pem` files in the `node-rev-proxy` direcotry for your own (Ensure that the file names stay the same)
 2. Execute the `$ sh reset-nginx.sh`
 
-### Add additional users
+### Add Additional Users
 
 To add additional users go into the `node-rev-proxy` directory of this repository `$ cd node-rev-proxy`
 and exexute the `$ sh add-nginx-user.sh <user> <password>`. This adds a user to the `.htpasswd` file, which is mounted into the nginx.
