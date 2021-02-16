@@ -119,7 +119,7 @@ The nginx setup protects the node with HTTP basic auth. This has to be configure
 
 ## Setup nginx
 
-### Using Your Own nginx
+### Disable nginx/Using Your Own nginx
 
 You can also setup your own reverse proxy. To disable the default nginx, set the  environment variable `NGINX_PROXY_ENABLED` to `false` before exexuting the `$ sh 01_start-single-host-environment.sh` script.
 
