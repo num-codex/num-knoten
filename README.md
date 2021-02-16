@@ -29,7 +29,6 @@ This is an overview of the reverse proxy architecture and the respective local p
 - [Git](https://git-scm.com/downloads) is required to clone this repository.
 - [Docker Engine Release 19.03.0+](https://docs.docker.com/engine/install)
 - [Docker Compose 1.27.0+](https://docs.docker.com/compose/install/) if you are not using Docker Desktop for Mac/Windows
-- openssl
 
 We do not provide specific hardware requirements, but it is recommended to monitor the resource utilization of each component and scale out accordingly.
 
