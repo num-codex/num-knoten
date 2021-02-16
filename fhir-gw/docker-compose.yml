@@ -10,18 +10,20 @@ services:
       SERVICES_PSEUDONYMIZER_URL: ${SERVICES_PSEUDONYMIZER_URL:-http://fhir-pseudonymizer:8080/fhir}
       SERVICES_LOINC_CONVERSIONS_URL: ${SERVICES_LOINC_CONVERSIONS_URL:-http://loinc-converter:8080/api/v1}
       SERVICES_FHIRSERVER_URL: ${SERVICES_FHIRSERVER_URL:-http://fhir-server:8080/fhir}
-      SERVICES_FHIRSERVER_ENABLED: ${SERVICES_FHIRSERVER_ENABLED:-false}
+      SERVICES_FHIRSERVER_ENABLED: ${SERVICES_FHIRSERVER_ENABLED:-true}
       SERVICES_PSQL_ENABLED: ${SERVICES_PSQL_ENABLED:-true}
       SERVICES_KAFKA_ENABLED: ${SERVICES_KAFKA_ENABLED:-false}
       BOOTSTRAP_SERVERS: ${BOOTSTRAP_SERVERS:-kafka1:19092}
       OPENTRACING_JAEGER_ENABLED: ${OPENTRACING_JAEGER_ENABLED:-false}
       OPENTRACING_JAEGER_UDP_SENDER_HOST: ${OPENTRACING_JAEGER_UDP_SENDER_HOST:-jaeger}
     ports:
-      - ${PORT_FHIR_GATEWAY:-18080}:8080
+      - ${PORT_FHIR_GATEWAY:-127.0.0.1:18080}:8080
     depends_on:
       - loinc-converter
       - fhir-db
       - fhir-pseudonymizer
+    networks:
+      - num-node
 
   fhir-pseudonymizer:
     image: docker.miracum.org/miracum-etl/fhir-pseudonymizer:1.6.0
@@ -31,9 +33,13 @@ services:
       - ./anonymization.yaml:/etc/anonymization.yaml:ro
     depends_on:
       - gpas
+    networks:
+      - num-node
 
   loinc-converter:
     image: docker.miracum.org/miracum-etl/loinc-conversion:1.10.1
+    networks:
+      - num-node
 
   fhir-db:
     image: postgres:12.5
@@ -43,9 +49,11 @@ services:
       POSTGRES_DB: ${FHIR_GATEWAY_DB_DATABASE:-fhir}
       POSTGRES_PASSWORD: ${FHIR_GATEWAY_DB_PASSWORD:-postgres}
     ports:
-      - ${PORT_FHIR_GATEWAY_DB:-15432}:5432
+      - ${PORT_FHIR_GATEWAY_DB:-127.0.0.1:15432}:5432
     volumes:
       - fhir-gateway-data:/var/lib/postgresql/data:rw
+    networks:
+      - num-node
 
   gpas:
     image: docker.miracum.org/gpas/gpas:1.10.0-20201221
@@ -59,9 +67,11 @@ services:
         -Djava.net.preferIPv4Stack=true
         -Djava.awt.headless=true
     ports:
-      - ${PORT_GPAS:-18081}:8080
+      - ${PORT_GPAS:-127.0.0.1:18081}:8080
     volumes:
       - gpas-data:/var/lib/mysql
+    networks:
+      - num-node
 
   gpasinit-patient:
     image: curlimages/curl:7.74.0
@@ -102,6 +112,8 @@ services:
       http://gpas:8080/gpas/DomainService
     depends_on:
       - gpas
+    networks:
+      - num-node
 
   gpasinit-fall:
     image: curlimages/curl:7.74.0
@@ -142,7 +154,14 @@ services:
       http://gpas:8080/gpas/DomainService
     depends_on:
       - gpas
+    networks:
+      - num-node
 
 volumes:
   fhir-gateway-data: {}
   gpas-data: {}
+
+networks:
+  num-node:
+    external: true
+    name: num-node

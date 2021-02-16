@@ -15,3 +15,10 @@ services:
     volumes:
       - ${ODM_FILE_PATH:-./test-odm.xml}:/workspace/input/ODM.xml # Comment line for input from RedCap API
       - ${FHIR_BUNDLES_FOLDER_PATH:-./out}:/workspace/output # This is only used if fhir.server.url ist commented out
+    networks:
+      - num-node
+
+networks:
+  num-node:
+    external: true
+    name: num-node

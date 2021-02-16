@@ -1,10 +1,10 @@
 # NUM-Knoten v2
 
-This repository contains the deployment package for the CODEX NUM-Knoten.
+Deployment package for the CODEX NUM-Knoten v2
 
-## Current Version (NUM-Knoten v2.0)
+## Current Version (NUM-Knoten v2.1)
 
-![NUM-Knoten v2.0](img/num-codex-ap6-nk-v2.0.png)
+![NUM-Knoten v2.1](img/num-codex-ap6-nk-v2.1.png)
 
 Currently, this version is an early release for testing purposes and does not contain all of the planned components (e.g. no GECCO-Merger that merges parallel data pipelines from EDC and clinical source systems). Also, only parts of the pipeline support incremental loading. In further development, the whole pipelines is planned to be able to load data incrementally (Delta-Update).
 
@@ -28,6 +28,17 @@ We do not provide specific hardware requirements, but it is recommended to monit
 
 **IMPORTANT**: Make sure Docker gets enough memory. When using Windows, Docker is given only 2GB by default, which is not enough. Right-click on the docker symbol in the taskbar, go to "Resources" and set the memory to at least 8GB.
 
+### Setup the Environment
+
+Please be aware of the nginx setup described in section [Setup nginx](#setup-nginx). You can also disable provided nginx reverse proxy setup at all (or substitute with your own). Be aware, that by default all ports to the different interfaces are only exposed to localhost. (Compare regarding `docker-compose.yml` manifests)
+
+`$ sh 00_setup-project-environment.sh <user> <password>`
+
+This script generates a self-signed certificate for the node nginx and sets up one user to the basic auth access from outside localhost.
+You can add more users or use your own certificate (see the [Setup nginx](#setup-nginx) section below).
+
+Note: Please be aware that the selfsigned certificate needs a browser like Firefox that allows to bypass security warnings regarding invalid certificates.
+
 ### Start Environment
 
 `$ sh 01_start-single-host-environment.sh`
@@ -37,7 +48,6 @@ We do not provide specific hardware requirements, but it is recommended to monit
 **WARNING**: This also deletes all volumes, databases, pseudonym mappings and log files. Please make sure that you backup any information necessary before executing this script.
 
 `$ sh 02_remove-single-host-environment.sh`
-
 
 Note: Because of the multi component structure, there may arise some errors that state that the network cannot be removed because of active endpoints. Please ignore these error messages for now, as the network is nevertheless removed at the end of the script.
 
@@ -80,6 +90,8 @@ ODM_REDCAP_API_URL=https://redcap.uk-mittelerde.de/api/
 
 ## URLs and Default Credentials
 
+The following URLs work with access on the localhost. For access from outside, please be aware of the nginx setup (see also next sections).
+
 | Component                    | URL                                              | Default User | Default Password |
 |------------------------------|--------------------------------------------------|--------------|------------------|
 | FHIR-GW API                  | <http://localhost:18080/fhir>                    | -            | -                |
@@ -89,6 +101,45 @@ ODM_REDCAP_API_URL=https://redcap.uk-mittelerde.de/api/
 | gPAS Web UI                  | <http://localhost:18081/gpas-web>                | -            | -                |
 | i2b2 Web UI                  | <http://localhost/webclient/>                    | miracum      | demouser         |
 | i2b2 DB JDBC                 | <jdbc:postgresql://localhost:25432/i2b2>         | i2b2         | demouser         |
+| FHIR Server                  | <http://localhost:8081/fhir>                     | -            | -                |
+
+## nginx Setup URLs and Default Credentials
+
+These are the URLs for access to the webclients via nginx.
+
+| Component   | URL                              | Default User | Default Password |
+|-------------|----------------------------------|--------------|------------------|
+| FHIR-GW API | <https://localhost/fhir-gw/fhir> | -            | -                |
+| gPAS Web UI | <https://localhost/gpas-web>     | -            | -                |
+| i2b2 Web UI | <https://localhost/i2b2>         | miracum      | demouser         |
+| FHIR Server | <https://localhost/fhir>         | -            | -                |
+
+For the URLs above, substitude "localhost" with your server ip or domain accordingly.
+The nginx setup protects the node with HTTP basic auth. This has to be configured and users need to be created accordingly (see Setup nginx below).
+
+## Setup nginx
+
+### Disable nginx/Using Your Own nginx
+
+You can also setup your own reverse proxy. To disable the default nginx, set the  environment variable `NGINX_PROXY_ENABLED` to `false` before exexuting the `$ sh 01_start-single-host-environment.sh` script.
+
+In case you have already started up the environment, execute `$ sh 02_remove-single-host-environment.sh` and then execute `$ sh 01_start-single-host-environment.sh` again.
+
+### Add Your Own Certificate
+
+This project generates its own (self-signed) certificate for the nginx to use. This certificate is needed to enable https for the nginx and encrypt the communication. For productive deployment, the certificate should be subsituted with an own trusted certificate. To do this, follow these steps:
+
+1. Exchange the `cert.pem` and `key.pem` files in the `node-rev-proxy` direcotry for your own (Ensure that the file names stay the same)
+2. Execute the `$ sh reset-nginx.sh`
+
+### Add Additional Users
+
+To add additional users go into the `node-rev-proxy` directory of this repository `$ cd node-rev-proxy`
+and exexute the `$ sh add-nginx-user.sh <user> <password>`. This adds a user to the `.htpasswd` file, which is mounted into the nginx.
+
+## Choose a FHIR Server
+
+This repository allows you to choose between two FHIR Servers (HAPI and Blaze). To configure which one to use, set the `FHIR_SERVER` variable accordingly, to either `hapi`or `blaze`. The default server is HAPI.
 
 ## Clear FHIR-DB
 
