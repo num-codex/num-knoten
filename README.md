@@ -24,6 +24,11 @@ This is an overview of the reverse proxy architecture and the respective local p
 
 ## Deployment on Single Host
 
+### Dependencies
+
+- EDC Data Dictionary Version: TBD
+- FHIR Profile Versions: TBD
+
 ### System requirements
 
 - [Git](https://git-scm.com/downloads) is required to clone this repository.
