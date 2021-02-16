@@ -16,7 +16,7 @@ This is the target architecture for the NUM-Knoten v2 containing also the possib
 
 Note: The FHIR-GW also provides interfaces for Apache Kafka  and for filling a FHIR server with all resources in parallel (shown with dotted lines). Though, the default and official supported way is shown with solid lines.
 
-### NUM-Knoten reverse proxy and port mappings
+## NUM-Knoten nginx Reverse Proxy and Port Mappings
 
 ![NUM-Knoten v2 NGINX](img/num-codex-ap6-nk-v2-final-nginx.png)
 
