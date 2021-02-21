@@ -16,7 +16,7 @@ docker volume rm ${COMPOSE_PROJECT}_blaze-data
 docker volume rm ${COMPOSE_PROJECT}_hapi-data
 
 echo "Remove num node docker network, if it exists..."
-if [ ! "$(docker network ls | grep num-node)" ]; then
+if [ "$(docker network ls | grep num-node)" ]; then
 docker network remove num-node
 fi
 
