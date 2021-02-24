@@ -1,5 +1,19 @@
 {
   "extends": [
     "config:base"
-  ]
+  ],
+  "hostRules": [
+    {
+      "hostType": "docker",
+      "hostName": "index.docker.io"
+    },
+    {
+      "hostType": "docker",
+      "hostName": "ghcr.io"
+    },
+    {
+      "hostType": "docker",
+      "hostName": "harbor.miracum.org"
+    },
+  ],
 }
