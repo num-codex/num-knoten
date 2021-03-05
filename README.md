@@ -26,7 +26,7 @@ This is an overview of the reverse proxy architecture and the respective local p
 
 ### Dependencies
 
-- EDC Data Dictionary Version: TBD
+- EDC Data Dictionary Version: 2021-03-03
 - FHIR Profile Versions: TBD
 
 ### System requirements
