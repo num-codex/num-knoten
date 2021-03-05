@@ -1,7 +1,6 @@
 services:
   odm2fhir:
     image: ghcr.io/num-codex/odm2fhir:0.4.7-alpha-snapshot
-    restart: "no"
     environment:
       ODM.REDCAP.API.URL: ${ODM_REDCAP_API_URL}
       ODM.REDCAP.API.TOKEN: ${ODM_REDCAP_API_TOKEN}
@@ -15,10 +14,3 @@ services:
     volumes:
       - ${ODM_FILE_PATH:-./test-odm.xml}:/workspace/input/ODM.xml # Comment line for input from RedCap API
       - ${FHIR_BUNDLES_FOLDER_PATH:-./out}:/workspace/output # This is only used if fhir.server.url ist commented out
-    networks:
-      - num-node
-
-networks:
-  num-node:
-    external: true
-    name: num-node

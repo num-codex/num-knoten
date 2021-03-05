@@ -1,7 +1,7 @@
 services:
   fhir-gateway:
     image: harbor.miracum.org/miracum-etl/fhir-gateway:3.3.7
-    restart: on-failure
+    restart: unless-stopped
     environment:
       SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL:-jdbc:postgresql://fhir-db:5432/fhir}
       SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_USERNAME:-postgres}
@@ -22,24 +22,20 @@ services:
       - loinc-converter
       - fhir-db
       - fhir-pseudonymizer
-    networks:
-      - num-node
 
   fhir-pseudonymizer:
     image: harbor.miracum.org/miracum-etl/fhir-pseudonymizer:1.6.0
+    restart: unless-stopped
     environment:
       GPAS__URL: ${GPAS_URL:-http://gpas:8080/gpas/gpasService}
     volumes:
       - ./anonymization.yaml:/etc/anonymization.yaml:ro
     depends_on:
       - gpas
-    networks:
-      - num-node
 
   loinc-converter:
     image: harbor.miracum.org/miracum-etl/loinc-conversion:1.10.1
-    networks:
-      - num-node
+    restart: unless-stopped
 
   fhir-db:
     image: postgres:12.5
@@ -52,8 +48,6 @@ services:
       - ${PORT_FHIR_GATEWAY_DB:-127.0.0.1:15432}:5432
     volumes:
       - fhir-gateway-data:/var/lib/postgresql/data:rw
-    networks:
-      - num-node
 
   gpas:
     image: harbor.miracum.org/gpas/gpas:1.10.0-20201221
@@ -70,8 +64,6 @@ services:
       - ${PORT_GPAS:-127.0.0.1:18081}:8080
     volumes:
       - gpas-data:/var/lib/mysql
-    networks:
-      - num-node
 
   gpasinit-patient:
     image: curlimages/curl:7.74.0
@@ -112,8 +104,6 @@ services:
       http://gpas:8080/gpas/DomainService
     depends_on:
       - gpas
-    networks:
-      - num-node
 
   gpasinit-fall:
     image: curlimages/curl:7.74.0
@@ -154,14 +144,7 @@ services:
       http://gpas:8080/gpas/DomainService
     depends_on:
       - gpas
-    networks:
-      - num-node
 
 volumes:
   fhir-gateway-data: {}
   gpas-data: {}
-
-networks:
-  num-node:
-    external: true
-    name: num-node

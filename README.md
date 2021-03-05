@@ -20,7 +20,7 @@ Note: The FHIR-GW also provides interfaces for Apache Kafka  and for filling a F
 
 ![NUM-Knoten v2 NGINX](img/num-codex-ap6-nk-v2-final-nginx.png)
 
-This is an overview of the reverse proxy architecture and the respective local port mappings for the NUM-Knoten v2 
+This is an overview of the reverse proxy architecture and the respective local port mappings for the NUM-Knoten v2.
 
 ## Deployment on Single Host
 
@@ -145,9 +145,3 @@ and exexute the `$ sh add-nginx-user.sh <user> <password>`. This adds a user to 
 ## Choose a FHIR Server
 
 This repository allows you to choose between two FHIR Servers (HAPI and Blaze). To configure which one to use, set the `FHIR_SERVER` variable accordingly, to either `hapi`or `blaze`. The default server is HAPI.
-
-## Clear FHIR-DB
-
-If necessary, the FHIR-DB can be cleared by truncating the PostgreSQL database's table 'resources'. Therefore use the following script:
-
-`$ sh 06_clear-fhir-db.sh`
