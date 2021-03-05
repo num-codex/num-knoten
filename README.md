@@ -62,13 +62,7 @@ Note: Please be aware that the selfsigned certificate needs a browser like Firef
 
 Note: Because of the multi component structure, there may arise some errors that state that the network cannot be removed because of active endpoints. Please ignore these error messages for now, as the network is nevertheless removed at the end of the script.
 
-### Test from FHIR-GW on
-
-You can test the pipeline without odm2fhir by sending a FHIR resource directly to the FHIR-GW REST API when the environment is up:
-
-`$ sh 03_send-test-resource-to-fhir-gw.sh`
-
-### Execute/Test from odm2fhir on
+### Execute/Test from odm2fhir to FHIR-GW
 
 You can test the pipeline from EDC/odm2fhir on by simply executing odm2fhir when the environment is up:
 
