@@ -1,15 +1,11 @@
 services:
   fhir-server:
-    container_name: fhir-server
-    # image: hapiproject/hapi:v5.1.0
-    image: ghcr.io/chgl/hapi/hapi-fhir-jpaserver-starter:5.2.0-distroless
+    image: ghcr.io/chgl/hapi-fhir-jpaserver-starter:1.0.0-hapi5.3.0-distroless
     restart: unless-stopped
     ports:
       - ${PORT_HAPI_FHIR:-127.0.0.1:8081}:8080
-    volumes:
-      - ./application.yml:/data/hapi/application.yml
     environment:
-      SPRING_DATASOURCE_URL: "jdbc:postgresql://db:5432/fhir?currentSchema=public"
+      SPRING_DATASOURCE_URL: "jdbc:postgresql://fhir-server-db:5432/fhir?currentSchema=public"
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: postgres
       SPRING_DATASOURCE_DRIVERCLASSNAME: org.postgresql.Driver
@@ -17,15 +13,11 @@ services:
       VALIDATION_REQUESTS_ENABLED: "false"
       HAPI_FHIR_USE_APACHE_ADDRESS_STRATEGY: "true"
     depends_on:
-      - db
+      - fhir-server-db
 
-  db:
-    container_name: hapidb
+  fhir-server-db:
     image: postgres:12.6-alpine
     restart: unless-stopped
     environment:
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: fhir
-
-volumes:
-  hapi-data: {}
