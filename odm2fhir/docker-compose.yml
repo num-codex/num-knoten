@@ -1,10 +1,10 @@
 services:
   odm2fhir:
-    image: ghcr.io/num-codex/odm2fhir:0.4.7-alpha-snapshot
+    image: ghcr.io/num-codex/odm2fhir:0.5.0
     environment:
       ODM.REDCAP.API.URL: ${ODM_REDCAP_API_URL}
       ODM.REDCAP.API.TOKEN: ${ODM_REDCAP_API_TOKEN}
-      FHIR.SERVER.URL: ${FHIR_SERVER_URL:-http://fhir-gateway:8080/fhir} # Comment line for output in local file system (./out)
+      # FHIR.SERVER.URL: ${FHIR_SERVER_URL:-http://fhir-gateway:8080/fhir} # Comment line for output in local file system (./out)
       FHIR.SERVER.BASICAUTH.USERNAME: ${FHIR_SERVER_BASICAUTH_USERNAME}
       FHIR.SERVER.BASICAUTH.PASSWORD: ${FHIR_SERVER_BASICAUTH_PASSWORD}
       FHIR.SERVER.OAUTH2.TOKEN.URL: ${FHIR_SERVER_OAUTH2_TOKEN_URL}
