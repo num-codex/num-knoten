@@ -1,3 +1,5 @@
+version: "3.9" # optional since v1.27.0
+
 services:
   i2b2-2web:
     container_name: i2b2web

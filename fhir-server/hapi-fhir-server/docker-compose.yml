@@ -1,3 +1,5 @@
+version: "3.9" # optional since v1.27.0
+
 services:
   fhir-server:
     image: ghcr.io/chgl/hapi-fhir-jpaserver-starter:1.0.0-hapi5.3.0-distroless
@@ -12,6 +14,8 @@ services:
       SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.PostgreSQL10Dialect
       VALIDATION_REQUESTS_ENABLED: "false"
       HAPI_FHIR_USE_APACHE_ADDRESS_STRATEGY: "true"
+      HAPI_FHIR_ENFORCE_REFERENTIAL_INTEGRITY_ON_DELETE: ${HAPI_FHIR_ENFORCE_REFERENTIAL_INTEGRITY_ON_DELETE:-TRUE}
+      HAPI_FHIR_ENFORCE_REFERENTIAL_INTEGRITY_ON_WRITE: ${HAPI_FHIR_ENFORCE_REFERENTIAL_INTEGRITY_ON_WRITE:-TRUE}
     depends_on:
       - fhir-server-db
 

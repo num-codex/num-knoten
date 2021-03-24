@@ -1,3 +1,5 @@
+version: "3.9" # optional since v1.27.0
+
 services:
   fhir-gateway:
     image: harbor.miracum.org/miracum-etl/fhir-gateway:3.3.7
