@@ -1,7 +1,8 @@
+version: "3.9" # optional since v1.27.0
+
 services:
   odm2fhir:
-    image: ghcr.io/num-codex/odm2fhir:0.3.0-alpha-snapshot
-    restart: "no"
+    image: ghcr.io/num-codex/odm2fhir:0.5.1
     environment:
       ODM.REDCAP.API.URL: ${ODM_REDCAP_API_URL}
       ODM.REDCAP.API.TOKEN: ${ODM_REDCAP_API_TOKEN}
@@ -11,14 +12,8 @@ services:
       FHIR.SERVER.OAUTH2.TOKEN.URL: ${FHIR_SERVER_OAUTH2_TOKEN_URL}
       FHIR.SERVER.OAUTH2.CLIENT.ID: ${FHIR_SERVER_OAUTH2_CLIENT_ID}
       FHIR.SERVER.OAUTH2.CLIENT.SECRET: ${FHIR_SERVER_OAUTH2_CLIENT_SECRET}
+      FHIR.UPDATEASCREATE.ENABLED: ${FHIR_UPDATEASCREATE_ENABLED:-TRUE}
       # CRON: ${CRON:-"0 0 0 0 * *"}
     volumes:
       - ${ODM_FILE_PATH:-./test-odm.xml}:/workspace/input/ODM.xml # Comment line for input from RedCap API
       - ${FHIR_BUNDLES_FOLDER_PATH:-./out}:/workspace/output # This is only used if fhir.server.url ist commented out
-    networks:
-      - num-node
-
-networks:
-  num-node:
-    external: true
-    name: num-node

@@ -20,13 +20,13 @@ Note: The FHIR-GW also provides interfaces for Apache Kafka  and for filling a F
 
 ![NUM-Knoten v2 NGINX](img/num-codex-ap6-nk-v2-final-nginx.png)
 
-This is an overview of the reverse proxy architecture and the respective local port mappings for the NUM-Knoten v2 
+This is an overview of the reverse proxy architecture and the respective local port mappings for the NUM-Knoten v2.
 
 ## Deployment on Single Host
 
 ### Dependencies
 
-- EDC Data Dictionary Version: TBD
+- EDC Data Dictionary Version: 2021-03-03
 - FHIR Profile Versions: TBD
 
 ### System requirements
@@ -62,19 +62,13 @@ Note: Please be aware that the selfsigned certificate needs a browser like Firef
 
 Note: Because of the multi component structure, there may arise some errors that state that the network cannot be removed because of active endpoints. Please ignore these error messages for now, as the network is nevertheless removed at the end of the script.
 
-### Test from FHIR-GW on
-
-You can test the pipeline without odm2fhir by sending a FHIR resource directly to the FHIR-GW REST API when the environment is up:
-
-`$ sh 03_send-test-resource-to-fhir-gw.sh`
-
-### Execute/Test from odm2fhir on
+### Execute/Test from odm2fhir to FHIR-GW
 
 You can test the pipeline from EDC/odm2fhir on by simply executing odm2fhir when the environment is up:
 
 `$ sh 04_execute-odm2fhir.sh`
 
-Note: The default settings use test-data in odm2fhir. To execute with real data, please set up odm2fhir according to the documentation on <https://github.com/num-codex/odm2fhir/packages/496804>. (Which sould be 1) Setting both, `ODM_REDCAP_API_TOKEN` and `ODM_REDCAP_API_URL` according to your EDC and 2) Comment out line 18 in `odm2fhir/docker-compose.yml`)
+Note: The default settings use test-data in odm2fhir. To execute with real data, please set up odm2fhir according to the documentation on <https://github.com/num-codex/odm2fhir>. (Which sould be 1) Setting both, `ODM_REDCAP_API_TOKEN` and `ODM_REDCAP_API_URL` according to your EDC and 2) Comment out line 18 in `odm2fhir/docker-compose.yml`)
 
 ### Test i2b2 data integration via "i2b2 FHIR Trigger Beta"
 
@@ -151,9 +145,3 @@ and exexute the `$ sh add-nginx-user.sh <user> <password>`. This adds a user to 
 ## Choose a FHIR Server
 
 This repository allows you to choose between two FHIR Servers (HAPI and Blaze). To configure which one to use, set the `FHIR_SERVER` variable accordingly, to either `hapi`or `blaze`. The default server is HAPI.
-
-## Clear FHIR-DB
-
-If necessary, the FHIR-DB can be cleared by truncating the PostgreSQL database's table 'resources'. Therefore use the following script:
-
-`$ sh 06_clear-fhir-db.sh`

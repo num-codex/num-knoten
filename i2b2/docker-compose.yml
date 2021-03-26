@@ -1,17 +1,17 @@
+version: "3.9" # optional since v1.27.0
+
 services:
   i2b2-2web:
     container_name: i2b2web
     image: harbor.miracum.org/i2b2/i2b2-web:miracolix-v1.3.0
     restart: unless-stopped
     ports:
-    - ${PORT_I2B2_WEB_HTTPS:-127.0.0.1:80}:80
+      - ${PORT_I2B2_WEB_HTTPS:-127.0.0.1:80}:80
     command: /run-httpd.sh localhost
     volumes:
       - ./i2b2_config_data.js:/var/www/html/webclient/i2b2_config_data.js:ro
     depends_on:
       - i2b2-wildfly
-    networks:
-      - num-node
 
   i2b2-wildfly:
     container_name: i2b2wildfly
@@ -21,8 +21,6 @@ services:
       - ./crc.properties:/opt/jboss/wildfly/standalone/configuration/crcapp/crc.properties:ro
     depends_on:
       - i2b2-pg
-    networks:
-      - num-node
 
   i2b2-pg:
     container_name: i2b2pg
@@ -34,13 +32,6 @@ services:
       - pg-data-volume:/var/lib/postgresql/9.4/main
       - ./prescript.sh:/prescript.sh
       - ./fhir-to-i2b2-trigger:/fhir-to-i2b2:ro
-    networks:
-      - num-node
 
 volumes:
   pg-data-volume:
-
-networks:
-  num-node:
-    external: true
-    name: num-node
