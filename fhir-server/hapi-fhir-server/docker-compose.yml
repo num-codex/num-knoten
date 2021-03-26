@@ -2,7 +2,7 @@ version: "3.9" # optional since v1.27.0
 
 services:
   fhir-server:
-    image: ghcr.io/chgl/hapi-fhir-jpaserver-starter:1.0.0-hapi5.3.0-distroless
+    image: ghcr.io/chgl/hapi-fhir-jpaserver-starter:v1.1.1-hapi5.3.0-distroless
     restart: unless-stopped
     ports:
       - ${PORT_HAPI_FHIR:-127.0.0.1:8081}:8080
