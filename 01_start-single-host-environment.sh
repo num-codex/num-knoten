@@ -11,15 +11,15 @@ docker-compose -p $COMPOSE_PROJECT -f i2b2/docker-compose.yml up -d
 docker-compose -p $COMPOSE_PROJECT -f fhir-gw/docker-compose.yml up -d
 
 if [ "$FHIR_SERVER" = "blaze" ]; then
-    echo "Using FHIR Server Blaze"
+    echo "Starting up FHIR-Server: Blaze"
     docker-compose -p $COMPOSE_PROJECT -f fhir-server/blaze-server/docker-compose.yml up -d
 elif [ "$FHIR_SERVER" = "hapi" ]; then
-    echo "Using FHIR Server HAPI"
+    echo "Starting up FHIR-Server: HAPI"
     docker-compose -p $COMPOSE_PROJECT -f fhir-server/hapi-fhir-server/docker-compose.yml up -d
 fi
 
 if [ "$NGINX_PROXY_ENABLED" = true ]; then
-    echo "Starting up NGINX reverse Proxy Server"
+    echo "Starting up nginx reverse proxy server"
     docker-compose -p $COMPOSE_PROJECT -f node-rev-proxy/docker-compose.yml up -d
 fi
 

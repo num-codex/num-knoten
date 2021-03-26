@@ -2,7 +2,7 @@ version: "3.9" # optional since v1.27.0
 
 services:
   fhir-gateway:
-    image: harbor.miracum.org/miracum-etl/fhir-gateway:3.3.7
+    image: harbor.miracum.org/miracum-etl/fhir-gateway:3.5.3
     restart: unless-stopped
     environment:
       SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL:-jdbc:postgresql://fhir-db:5432/fhir}
@@ -26,21 +26,22 @@ services:
       - fhir-pseudonymizer
 
   fhir-pseudonymizer:
-    image: harbor.miracum.org/miracum-etl/fhir-pseudonymizer:1.6.0
+    image: harbor.miracum.org/miracum-etl/fhir-pseudonymizer:${FHIR_PSEUDONYMIZER_VERSION:-v1.6.0}
     restart: unless-stopped
     environment:
       GPAS__URL: ${GPAS_URL:-http://gpas:8080/gpas/gpasService}
+      GPAS__VERSION: ${GPAS_VERSION:-1.10.0}
     volumes:
       - ./anonymization.yaml:/etc/anonymization.yaml:ro
     depends_on:
       - gpas
 
   loinc-converter:
-    image: harbor.miracum.org/miracum-etl/loinc-conversion:1.10.1
+    image: harbor.miracum.org/miracum-etl/loinc-conversion:1.12.0
     restart: unless-stopped
 
   fhir-db:
-    image: postgres:12.5
+    image: postgres:13.2
     restart: unless-stopped
     environment:
       POSTGRES_USER: ${FHIR_GATEWAY_DB_USER:-postgres}
@@ -68,7 +69,7 @@ services:
       - gpas-data:/var/lib/mysql
 
   gpasinit-patient:
-    image: curlimages/curl:7.74.0
+    image: curlimages/curl:7.75.0
     command: |
       -X POST
       -H 'Content-Type:application/xml'
