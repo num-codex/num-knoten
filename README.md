@@ -48,7 +48,10 @@ Please be aware of the nginx setup described in section [Setup nginx](#setup-ngi
 This script generates a self-signed certificate for the node nginx and sets up one user to the basic auth access from outside localhost.
 You can add more users or use your own certificate (see the [Setup nginx](#setup-nginx) section below).
 
-Note: Please be aware that the selfsigned certificate needs a browser like Firefox that allows to bypass security warnings regarding invalid certificates.
+Notes:
+
+- Please be aware that the selfsigned certificate needs a browser like Firefox that allows to bypass security warnings regarding invalid certificates.
+- On Windows 10 systems and when using Git Bash, you may encounter a path-related problem. The problem can be mitigated by executing `export MSYS_NO_PATHCONV=1` before running the script (details: https://github.com/docker/toolbox/issues/673).
 
 ### Start Environment
 
