@@ -71,7 +71,10 @@ You can test the pipeline from EDC/odm2fhir on by simply executing odm2fhir when
 
 `$ sh 04_execute-odm2fhir.sh`
 
-Note: The default settings use test-data in odm2fhir. To execute with real data, please set up odm2fhir according to the documentation on <https://github.com/num-codex/odm2fhir>. (Which sould be 1) Setting both, `ODM_REDCAP_API_TOKEN` and `ODM_REDCAP_API_URL` according to your EDC and 2) Comment out line 18 in `odm2fhir/docker-compose.yml`)
+Notes:
+
+- The default settings use test-data in odm2fhir. To execute with real data, please set up odm2fhir according to the documentation on <https://github.com/num-codex/odm2fhir>. (Which sould be 1) Setting both, `ODM_REDCAP_API_TOKEN` and `ODM_REDCAP_API_URL` according to your EDC and 2) Comment out line 18 in `odm2fhir/docker-compose.yml`)
+- Debugging: If the automatic upload to the FHIR Gateway fails, you can re-configure odm2fhir to write the generated FHIR JSON into the odm2fhir/out folder instead of sending it to the FHIR-GW. After that you can use the script `04b_send-json-to-fhir-gw.sh` to upload these files. For each file being uploaded, the script reports whether the upload was OK or not. In parallel, monitor the Docker logs of the FHIR-GW container. This may help identifying the cause why uploads fail. Possible reasons are: 1) bad FHIR ressources, e.g. due to bad ODM input data and 2) server timeouts. For the latter try switching from the HAPI to the Blaze FHIR server.
 
 ### Test i2b2 data integration via "i2b2 FHIR Trigger Beta"
 

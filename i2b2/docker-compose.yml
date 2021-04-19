@@ -30,8 +30,6 @@ services:
       - ${PORT_I2B2_DB:-127.0.0.1:25432}:5432
     volumes:
       - pg-data-volume:/var/lib/postgresql/9.4/main
-      - ./prescript.sh:/prescript.sh
-      - ./fhir-to-i2b2-trigger:/fhir-to-i2b2:ro
 
 volumes:
   pg-data-volume:

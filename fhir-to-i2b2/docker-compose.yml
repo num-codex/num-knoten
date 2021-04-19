@@ -1,0 +1,27 @@
+services:
+  fhirtoi2b2:
+    image: docker.miracum.org/miracum-etl/fhir-to-i2b2:$IMAGE_TAG
+    environment:
+      batch.chunkSize: ${BATCH_CHUNK_SIZE:-10000}
+      batch.asyncExecution: ${BATCH_ASYNC_EXECUTION:-0}
+      batch.throttleLimit: ${BATCH_THROTTLE_LIMIT:-4}
+      logging.level.org.miracum.etl.fhirtoi2b2: ${LOGGING_LEVEL:-DEBUG}
+      fhir.systems.encounterId: ${FHIR_SYSTEMS_ENCOUNTERID:-https://miracum.org/fhir/NamingSystem/identifier/EncounterId}
+      fhir.systems.observationId: ${FHIR_SYSTEMS_OBSERVATIONID:-https://miracum.org/fhir/NamingSystem/identifier/LaboratorySurrogateObservationId}
+      fhir.systems.patientId: ${FHIR_SYSTEMS_PATIENTID:-https://miracum.org/fhir/NamingSystem/identifier/PatientId}
+      data.outputFileDirectory: ${DATA_OUTPUT_FILE_DIRECTORY:-/data/output}
+      data.writeBundlesToFile: $WRITE_TO_FILE
+      data.writeToPsql: $WRITE_TO_PSQL
+      data.method: $DATA_METHOD
+      data.db.input.url: ${DATA_DB_INPUT_URL:-jdbc:postgresql://fhir-db:5432/fhir}
+      data.db.input.user: ${DATA_DB_INPUT_USER:-postgres}
+      data.db.input.password: ${DATA_DB_INPUT_PASSWORD:-postgres}
+      data.db.input.pagingSize: ${DATA_DB_INPUT_PAGINGSIZE:-100000}
+      data.db.input.dateImportBegin: ${DATA_DB_INPUT_DATEIMPORTBEGIN:-}
+      data.db.input.dateImportEnd: ${DATA_DB_INPUT_DATEIMPORTEND:-}
+      data.db.output.url: ${DATA_DB_OUTPUT_URL:-jdbc:postgresql://i2b2-pg:5432/i2b2}
+      data.db.output.user: ${DATA_DB_OUTPUT_USER:-i2b2}
+      data.db.output.password: ${DATA_DB_OUTPUT_PASSWORD:-demouser}
+      prometheus.pushgateway.url: ${PUSHGATEWAY_URL:-http://pushgateway:9091/}
+    volumes:
+      - ./log:/data
