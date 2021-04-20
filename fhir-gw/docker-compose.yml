@@ -2,7 +2,7 @@ version: "3.9" # optional since v1.27.0
 
 services:
   fhir-gateway:
-    image: harbor.miracum.org/miracum-etl/fhir-gateway:3.5.3
+    image: harbor.miracum.org/miracum-etl/fhir-gateway:v3.6.1
     restart: unless-stopped
     environment:
       SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL:-jdbc:postgresql://fhir-db:5432/fhir}
