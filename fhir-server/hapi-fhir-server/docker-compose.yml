@@ -20,7 +20,7 @@ services:
       - fhir-server-db
 
   fhir-server-db:
-    image: postgres:12.6-alpine
+    image: postgres:13.3-alpine
     restart: unless-stopped
     environment:
       POSTGRES_PASSWORD: postgres

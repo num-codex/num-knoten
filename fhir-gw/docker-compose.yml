@@ -41,7 +41,7 @@ services:
     restart: unless-stopped
 
   fhir-db:
-    image: postgres:13.2
+    image: postgres:13.3
     restart: unless-stopped
     environment:
       POSTGRES_USER: ${FHIR_GATEWAY_DB_USER:-postgres}
