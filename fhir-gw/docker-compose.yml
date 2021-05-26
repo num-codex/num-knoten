@@ -37,7 +37,7 @@ services:
       - gpas
 
   loinc-converter:
-    image: harbor.miracum.org/miracum-etl/loinc-conversion:1.12.0
+    image: harbor.miracum.org/miracum-etl/loinc-conversion:v1.12.1
     restart: unless-stopped
 
   fhir-db:
