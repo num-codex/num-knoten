@@ -2,6 +2,8 @@
 
 Deployment package for the CODEX NUM-Knoten v2
 
+<span style="color:red">!!! Warning: This repository is deprecated and only available as reference. The respository is neither maintained, updated nor supported.</span>.
+
 ## Current Version (NUM-Knoten v2.1)
 
 ![NUM-Knoten v2.1](img/num-codex-ap6-nk-v2.1.png)
